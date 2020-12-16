@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>客户管理</title>
+<link rel="stylesheet" href="../static/css/reset.css" />
+<link rel="stylesheet" href="../static/css/customer-management-index.css" />
+<link rel="stylesheet" href="../static/css/page-con.css" />
+<link rel="stylesheet" type="text/css" href="../static/css/IM-index.css"/>
+<link rel="stylesheet" type="text/css" href="../static/css/examine.css"/>
+<script src="../static/js/jquery.js"></script>
+<script src="../static/js/super.js"></script>
+</head>
+<style>
+html, body {
+	height: 100%;
+}
+</style>
+<body>
+<div class="xtgl1"> <a class="xtgl1_kh" href="customerList.html" style="color: color: #58a0fd">客户管理</a><a class="xtgl1_xx" href="examine-x.html">信息管理员管理</a> </div>
+<div class="cus-content">
+  <p class="cus-admin"> <span>当前页面 : </span> <a class="active" href="customerList.html">审核管理</a> </p>
+  <div class="cus-search">
+    <label>真实姓名</label>
+    <input type="text" id="searchName" value="" maxlength="10" onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,'')" onpaste="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,'')" oncontextmenu = "value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,'')"/>
+    <label>客户单位</label>
+    <input type="text" id="searchCompany" value="" maxlength="20" onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,'')" onpaste="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,'')" oncontextmenu = "value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,'')"/>
+    <label>审核状态</label>
+    <select class="cus-examine" id="searchStatus">
+      <option value="">请选择</option>
+      <option value="0">未审核</option>
+      <option value="1">审核通过</option>
+      <option value="2">驳回</option>
+    </select>
+    <a href="javascript:void(0)" onclick="searchByName()" class="search-btn">搜索</a> </div>
+  <table class = "cus-info">
+    <tr class="info-first info-item">
+      <td>序号</td>
+      <td>账号</td>
+      <td>真实姓名</td>
+      <td>身份证号</td>
+      <td>客户单位</td>
+      <td>客户邮箱</td>
+      <td>客户手机号码</td>
+      <td>申请时间</td>
+      <!-- <td>申请方向</td> -->
+      <td>审核状态</td>
+      <td>客户状态</td>
+      <td>操作</td>
+    </tr>
+    <tr class="info-item">
+      <td>1</td>
+      <td>hhh555</td>
+      <td>sdfsd</td>
+      <td>211382199201203915</td>
+      <td>sdfdsdf</td>
+      <td>2503085431@qq.com</td>
+      <td>15896498635</td>
+      <td>2018-03-12</td>
+      <td class="ifexamine">驳回 </td>
+      <td>禁用</td>
+      <td class="operation"><div class="ifshow"><a href="customerExamine.html" class="examine">审核</a></div></td>
+    </tr>
+    <tr class="info-item">
+      <td>1</td>
+      <td>hhh555</td>
+      <td>sdfsd</td>
+      <td>211382199201203915</td>
+      <td>sdfdsdf</td>
+      <td>2503085431@qq.com</td>
+      <td>15896498635</td>
+      <td>2018-03-12</td>
+      <td class="ifexamine">通过 </td>
+      <td>启用</td>
+      <td class="operation"><div class="ifshow"><a class="modify" href="customerModify.html">修改</a><a class="delete" onclick="return confirm('是否删除')" href="deleteById?id=69">删除</a></div></td>
+    </tr>
+    <tr class="info-item">
+      <td>1</td>
+      <td>hhh555</td>
+      <td>sdfsd</td>
+      <td>211382199201203915</td>
+      <td>sdfdsdf</td>
+      <td>2503085431@qq.com</td>
+      <td>15896498635</td>
+      <td>2018-03-12</td>
+      <td class="ifexamine">驳回 </td>
+      <td>启用</td>
+      <td class="operation"><div class="ifshow"><a class="modify" href="customerModify.html">修改</a><a class="delete" onclick="return confirm('是否删除')" href="deleteById?id=69">删除</a></div></td>
+    </tr>
+    <tr class="info-item">
+      <td>1</td>
+      <td>hhh555</td>
+      <td>sdfsd</td>
+      <td>211382199201203915</td>
+      <td>sdfdsdf</td>
+      <td>2503085431@qq.com</td>
+      <td>15896498635</td>
+      <td>2018-03-12</td>
+      <td class="ifexamine">未审核</td>
+      <td>启用</td>
+      <td class="operation"><div class="ifshow"><a href="customerExamine.html" class="examine">审核</a></div></td>
+    </tr>
+    <tr class="info-item">
+      <td>1</td>
+      <td>hhh555</td>
+      <td>sdfsd</td>
+      <td>211382199201203915</td>
+      <td>sdfdsdf</td>
+      <td>2503085431@qq.com</td>
+      <td>15896498635</td>
+      <td>2018-03-12</td>
+      <td class="ifexamine">驳回 </td>
+      <td>启用</td>
+      <td class="operation"><div class="ifshow"><a href="customerExamine.html" class="examine">审核</a></div></td>
+    </tr>
+  </table>
+  <div class="im-page">
+    <ul>
+      <li class="im-indexpage"><a href="">首页</a></li>
+      <li class="im-nextpage"><a href="">上一页</a></li>
+      <li class="im-pagenum"><a href="">1</a></li>
+      <li class="im-pagenum"><a href="">2</a></li>
+      <li class="im-pagenum"><a href="">3</a></li>
+      <li class="im-pagenum"><a href="">4</a></li>
+      <li class="im-pagenum"><a href="">5</a></li>
+      <li class="im-nextpage"><a href="">下一页</a></li>
+      <li class="im-indexpage"><a href="">尾页</a></li>
+    </ul>
+  </div>
+</div>
+</body>
+<script type="text/javascript" src="<%=path%>/static/js/jquery.js" ></script>
+<script type="text/javascript" src="<%=path%>/static/js/customer-management-index.js" ></script>
+<script type="text/javascript">
+		function searchByName(){
+			var name = $("#searchName").val();
+			var company = $("#searchCompany").val();
+			var state = $("#searchStatus").val();
+
+			location.href="searchByName?param1="+name+"&param2="+state+"&param3="+company;
+		}
+	</script>
+</html>

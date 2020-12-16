@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>客户管理</title>
+		<link rel="stylesheet" type="text/css" href="<%=path%>/static/css/reset.css"/>
+			<script src="<%=path%>/static/js/jquery.js"></script>
+		<style>
+			.title{
+				background: #e2efff;
+			}
+			.title .tit{
+				opacity: 1;
+				background: none;
+			}
+			.title .logo{
+				text-align: center;
+				display: inline-block;
+				width: 237px;
+				height: 62px;
+				font-size: 18px;
+				line-height: 62px;
+				background: #549efd;
+				color: #fff;
+			}
+			.quit{
+				display: inline-block;
+				float: right;
+				text-align: center;
+				width: 90px;
+				height: 62px;
+				color: #4f6aa8;
+				line-height: 62px;
+				background: url(../../glory/static/img/sinout.png) no-repeat 65px 23px ;
+			}
+			a:hover{
+				color:#549efd;
+				background: url(../../glory/static/img/sinout1.png) no-repeat 65px 23px ;
+			}
+			.xx{
+				display: inline-block;
+			    width: 525px;
+			    padding-left: 87px;
+			    line-height: 62px;
+			    color: #4f6aa8;
+			    background: #e2efff url(../../glory/static/img/im.png) no-repeat 57px 18px;
+			}
+			.usename{
+				display:inline-block;
+				width:389px;
+				text-align:right;
+				font-size:14px;
+			}
+			.hea{
+				height: 50px;
+				line-height: 50px;
+				text-align: center;
+				font-size: 16px;
+				color: #fff;
+				background: #73b0ff;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="hea">中国农产品真菌毒素及产毒真菌污染数据库 </div>
+		<div class="title"><span class="logo">LOGO</span><span class="xx">客户管理</span><span class="usename">欢迎：<!--${userInfo.username}--></span><a href="javascript:if(confirm('确实要退出吗?'))location='<%=path%>/rest/user/logout'" class="quit">退出</a></div>
+		<iframe src="customer/selectAll" id="mainiframe" width="100%" height="100%" frameborder="no" border="0" iframe  name="if" scrolling="no"></iframe>
+	</body>
+	<script type="text/javascript">
+	
+			function reinitIframe(){
+			
+			var iframe = document.getElementById("mainiframe");
+			
+			try{
+			
+				var bHeight = iframe.contentWindow.document.body.scrollHeight;
+				
+				var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+				
+				var height = Math.max(bHeight, dHeight);
+				
+				iframe.height =  height;
+			
+			}catch (ex){
+				
+			}
+			
+			}
+			
+			window.setInterval("reinitIframe()", 200);
+	
+	</script>
+</html>

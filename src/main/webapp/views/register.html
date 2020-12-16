@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<base href="">
+	<meta charset="UTF-8">
+	<title>登录</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/reset.css"/>
+	<link rel="stylesheet" href="../static/css/register.css" />
+	<script type="text/javascript" src="../static/js/jquery1.11.3-jquery.min.js" ></script>
+	<style type="text/css">
+		.register-lin span{
+			fon-size:12px;
+			color:#f00;
+			position: relative;
+    		left: 75px;
+    		float: left;
+		}
+		.register-data .register-lin .type1{
+			margin-left:-3px;
+			height: 13px;
+			width:30px;
+			float:none;
+			vertical-align:-7px;
+		}
+		.register-data .register-lin:last-child i{
+			vertical-align:-5px;
+			font-style:normal;
+		}
+	</style>
+
+</head>
+<body>
+	<div class="contaner">
+		<div class="register-info">
+			<p class="register-title">信息管理系统</p>
+			<div class="register-head">
+				<p>注册</p>
+			</div>
+			<div class="register-data">
+				<ul>
+					<li class="register-lin">
+						<lable>账号</lable>
+						<input type="text" name="account" placeholder="请输入账号"><span></span>
+					</li>
+					<li class="register-lin">
+						<lable>密码</lable>
+						<input type="password" name="pwd" placeholder="请输入密码"><span></span>
+					</li>
+					<li class="register-lin">
+						<lable>确认密码</lable>
+						<input type="password" name="pwd1" placeholder="请再次输入密码"><span></span>
+					</li>
+					<!-- <li class="register-lin">
+						<lable>申请方向</lable>
+						<select id="leib">
+							<option value="1">水果</option>
+							<option value="2">谷物</option>
+							<option value="3">油料</option>
+							<option value="4">坚果</option>
+							<option value="5">香辛</option>
+							<option value="6">饲料</option>
+						</select>
+					</li> -->
+					<li class="register-lin">
+						<lable>真实姓名</lable>
+						<input type="text" name="name" placeholder="请输入真实姓名"><span></span>
+					</li>
+					<li class="register-lin">
+						<lable>身份证号</lable>
+						<input type="text" name="idcard" placeholder="请输入身份证号"><span></span>
+					</li>
+					<li class="register-lin">
+						<lable>客户单位</lable>
+						<input text="text" name="company" placeholder="请输入客户单位"><span></span>
+					</li>
+					<li class="register-lin">
+						<lable>单位地址</lable>
+						<input text="text" name="address" placeholder="请输入单位地址"><span></span>
+					</li>
+					<li class="register-lin">
+						<lable>邮箱号码</lable>
+						<input type="text" name="email" placeholder="请输入邮箱号码"><span></span>
+					</li>
+					<li class="register-lin">
+						<lable>手机号码</lable>
+						<input type="text" placeholder="请输入手机号码"><span></span>
+					</li>
+					<li class="register-lin">
+						<lable>注册方向</lable>
+						<input class="type1" type="radio" name="type" value="1"/><i>数据录入</i>
+						<input class="type1" type="radio" name="type" value="2"/><i>数据浏览</i>
+						<span id="phone"></span>
+					</li>
+				</ul>
+				<a class="register-btn">接受协议并注册</a>
+				<a  class="register-clause">《用户协议》和《用户保护隐私条款》</a>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../static/js/registerCust.js" ></script>
+</html>

@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.message.dao.SampleInfoMapper">
+  <resultMap id="BaseResultMapByOne" type="com.message.pojo.SampleInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="sample_id" jdbcType="VARCHAR" property="sampleId" />
+    <result column="crop_category_id" jdbcType="INTEGER" property="cropCategoryId" />
+    <result column="breed" jdbcType="INTEGER" property="breed" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="county" jdbcType="VARCHAR" property="county" />
+    <result column="township" jdbcType="VARCHAR" property="township" />
+    <result column="village" jdbcType="VARCHAR" property="village" />
+    <result column="household" jdbcType="VARCHAR" property="household" />
+    <result column="harvest_time" jdbcType="TIMESTAMP" property="harvestTime" />
+    <result column="sampling_time" jdbcType="TIMESTAMP" property="samplingTime" />
+    <result column="sampling_people" jdbcType="VARCHAR" property="samplingPeople" />
+    <result column="pollution_rate" jdbcType="REAL" property="pollutionRate" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="isdel" jdbcType="INTEGER" property="isdel" />
+    <result column="input_time" jdbcType="TIMESTAMP" property="inputTime" />
+    <result column="flag" jdbcType="INTEGER" property="flag" />
+    <result column="enterpeople" jdbcType="INTEGER" property="enterpeople" />
+    <result column="varieties" jdbcType="VARCHAR" property="varieties" />
+    <result column="seasonal" jdbcType="LONGVARCHAR" property="seasonal" />
+    <result column="description" jdbcType="LONGVARCHAR" property="description" />
+    <association property="addressProvince" javaType="com.message.pojo.AddressProvince">
+      <result column="pname" jdbcType="VARCHAR" property="name" />
+    </association>
+    <association property="addressCity" javaType="com.message.pojo.AddressCity">
+      <result column="cname" jdbcType="VARCHAR" property="name" />
+    </association>
+    <association property="addressTown" javaType="com.message.pojo.AddressTown">
+      <result column="tname" jdbcType="VARCHAR" property="name" />
+    </association>
+    <association property="cropSpecies" javaType="com.message.pojo.CropSpecies">
+      <result column="crop_species" jdbcType="VARCHAR" property="cropSpecies" />
+    </association>
+    <collection property="sampleToxinList" ofType="com.message.pojo.SampleToxin">
+      <id column="tid" jdbcType="INTEGER" property="id" />
+      <result column="toxin_id" jdbcType="INTEGER" property="toxinId" />
+      <result column="toxin_count" jdbcType="REAL" property="toxinCount" />
+      <result column="sample_info_id" jdbcType="INTEGER" property="sampleInfoId" />
+      <association property="sampleToxinInfo" javaType="com.message.pojo.SampleToxinInfo">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="toxin_type" jdbcType="VARCHAR" property="toxinType" />
+        <result column="state" jdbcType="INTEGER" property="state" />
+      </association>
+    </collection>
+  </resultMap>
+
+
+  <resultMap id="BaseResultMap" type="com.message.pojo.SampleInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="sample_id" jdbcType="VARCHAR" property="sampleId" />
+    <result column="crop_category_id" jdbcType="INTEGER" property="cropCategoryId" />
+    <result column="breed" jdbcType="INTEGER" property="breed" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="county" jdbcType="VARCHAR" property="county" />
+    <result column="township" jdbcType="VARCHAR" property="township" />
+    <result column="village" jdbcType="VARCHAR" property="village" />
+    <result column="household" jdbcType="VARCHAR" property="household" />
+    <result column="harvest_time" jdbcType="TIMESTAMP" property="harvestTime" />
+    <result column="sampling_time" jdbcType="TIMESTAMP" property="samplingTime" />
+    <result column="sampling_people" jdbcType="VARCHAR" property="samplingPeople" />
+    <result column="pollution_rate" jdbcType="REAL" property="pollutionRate" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="isdel" jdbcType="INTEGER" property="isdel" />
+    <result column="input_time" jdbcType="TIMESTAMP" property="inputTime" />
+    <result column="flag" jdbcType="INTEGER" property="flag" />
+    <result column="enterpeople" jdbcType="INTEGER" property="enterpeople" />
+    <result column="varieties" jdbcType="VARCHAR" property="varieties" />
+    <result column="seasonal" jdbcType="LONGVARCHAR" property="seasonal" />
+    <result column="description" jdbcType="LONGVARCHAR" property="description" />
+    <association property="addressProvince" javaType="com.message.pojo.AddressProvince">
+      <result column="pname" jdbcType="VARCHAR" property="name" />
+    </association>
+    <association property="addressCity" javaType="com.message.pojo.AddressCity">
+      <result column="cname" jdbcType="VARCHAR" property="name" />
+    </association>
+    <association property="addressTown" javaType="com.message.pojo.AddressTown">
+      <result column="tname" jdbcType="VARCHAR" property="name" />
+    </association>
+    <association property="cropSpecies" javaType="com.message.pojo.CropSpecies">
+      <result column="crop_species" jdbcType="VARCHAR" property="cropSpecies" />
+    </association>
+      <association property="sampleToxinInfo" javaType="com.message.pojo.SampleToxinInfo">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="toxin_type" jdbcType="VARCHAR" property="toxinType" />
+        <result column="state" jdbcType="INTEGER" property="state" />
+      </association>
+    <collection property="sampleToxinList" ofType="com.message.pojo.SampleToxin">
+      <result column="toxin_id" jdbcType="INTEGER" property="toxinId"/>
+      <result column="toxin_count" jdbcType="REAL" property="toxinCount"/>
+    </collection>
+  </resultMap>
+
+
+  <resultMap id="BaseResultMapVO" type="com.message.vo.SampleInfoVO">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="sample_id" jdbcType="VARCHAR" property="sampleId" />
+    <result column="harvest_time" jdbcType="TIMESTAMP" property="harvestTime" />
+    <result column="sampling_time" jdbcType="TIMESTAMP" property="samplingTime" />
+    <result column="pollution_rate" jdbcType="REAL" property="pollutionRate" />
+    <result column="pname" jdbcType="VARCHAR" property="pname" />
+    <result column="cname" jdbcType="VARCHAR" property="cname" />
+    <result column="tname" jdbcType="VARCHAR" property="tname" />
+    <result column="crop_species" jdbcType="VARCHAR" property="crop" />
+    <result column="toxin_type" jdbcType="VARCHAR" property="toxins"/>
+
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, sample_id, crop_category_id, breed, province, city, county, township, village, 
+    household, harvest_time, sampling_time, sampling_people, pollution_rate, create_time, 
+    isdel, input_time, flag, enterpeople, varieties
+    seasonal, description
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sample_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sample_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.message.pojo.SampleInfo" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    insert into sample_info (id, sample_id, crop_category_id, 
+      breed, province, city, 
+      county, township, village, 
+      household, harvest_time, sampling_time, 
+      sampling_people, pollution_rate, create_time,
+      isdel, input_time, flag, 
+      enterpeople, varieties, seasonal,
+      description)
+    values (#{id,jdbcType=INTEGER}, #{sampleId,jdbcType=VARCHAR}, #{cropCategoryId,jdbcType=INTEGER}, 
+      #{breed,jdbcType=INTEGER}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{county,jdbcType=VARCHAR}, #{township,jdbcType=VARCHAR}, #{village,jdbcType=VARCHAR}, 
+      #{household,jdbcType=VARCHAR}, #{harvestTime,jdbcType=TIMESTAMP}, #{samplingTime,jdbcType=TIMESTAMP}, 
+      #{samplingPeople,jdbcType=VARCHAR}, #{pollutionRate,jdbcType=REAL}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{isdel,jdbcType=INTEGER}, #{inputTime,jdbcType=TIMESTAMP}, #{flag,jdbcType=INTEGER}, 
+      #{enterpeople,jdbcType=INTEGER}, #{varieties,jdbcType=VARCHAR}, #{seasonal,jdbcType=LONGVARCHAR}, 
+      #{description,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.message.pojo.SampleInfo">
+    insert into sample_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="sampleId != null">
+        sample_id,
+      </if>
+      <if test="cropCategoryId != null">
+        crop_category_id,
+      </if>
+      <if test="breed != null">
+        breed,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="county != null">
+        county,
+      </if>
+      <if test="township != null">
+        township,
+      </if>
+      <if test="village != null">
+        village,
+      </if>
+      <if test="household != null">
+        household,
+      </if>
+      <if test="harvestTime != null">
+        harvest_time,
+      </if>
+      <if test="samplingTime != null">
+        sampling_time,
+      </if>
+      <if test="samplingPeople != null">
+        sampling_people,
+      </if>
+      <if test="pollutionRate != null">
+        pollution_rate,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="isdel != null">
+        isdel,
+      </if>
+      <if test="inputTime != null">
+        input_time,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+      <if test="enterpeople != null">
+        enterpeople,
+      </if>
+      <if test="varieties != null">
+        varieties,
+      </if>
+      <if test="seasonal != null">
+        seasonal,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="sampleId != null">
+        #{sampleId,jdbcType=VARCHAR},
+      </if>
+      <if test="cropCategoryId != null">
+        #{cropCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="breed != null">
+        #{breed,jdbcType=INTEGER},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="county != null">
+        #{county,jdbcType=VARCHAR},
+      </if>
+      <if test="township != null">
+        #{township,jdbcType=VARCHAR},
+      </if>
+      <if test="village != null">
+        #{village,jdbcType=VARCHAR},
+      </if>
+      <if test="household != null">
+        #{household,jdbcType=VARCHAR},
+      </if>
+      <if test="harvestTime != null">
+        #{harvestTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="samplingTime != null">
+        #{samplingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="samplingPeople != null">
+        #{samplingPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="pollutionRate != null">
+        #{pollutionRate,jdbcType=REAL},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdel != null">
+        #{isdel,jdbcType=INTEGER},
+      </if>
+      <if test="inputTime != null">
+        #{inputTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="enterpeople != null">
+        #{enterpeople,jdbcType=INTEGER},
+      </if>
+      <if test="varieties != null">
+        #{varieties,jdbcType=VARCHAR},
+      </if>
+      <if test="seasonal != null">
+        #{seasonal,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.message.pojo.SampleInfo">
+    update sample_info
+    <set>
+      <if test="sampleId != null">
+        sample_id = #{sampleId,jdbcType=VARCHAR},
+      </if>
+      <if test="cropCategoryId != null">
+        crop_category_id = #{cropCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="breed != null">
+        breed = #{breed,jdbcType=INTEGER},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="county != null">
+        county = #{county,jdbcType=VARCHAR},
+      </if>
+      <if test="township != null">
+        township = #{township,jdbcType=VARCHAR},
+      </if>
+      <if test="village != null">
+        village = #{village,jdbcType=VARCHAR},
+      </if>
+      <if test="household != null">
+        household = #{household,jdbcType=VARCHAR},
+      </if>
+      <if test="harvestTime != null">
+        harvest_time = #{harvestTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="samplingTime != null">
+        sampling_time = #{samplingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="samplingPeople != null">
+        sampling_people = #{samplingPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="pollutionRate != null">
+        pollution_rate = #{pollutionRate,jdbcType=REAL},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdel != null">
+        isdel = #{isdel,jdbcType=INTEGER},
+      </if>
+      <if test="inputTime != null">
+        input_time = #{inputTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="enterpeople != null">
+        enterpeople = #{enterpeople,jdbcType=INTEGER},
+      </if>
+      <if test="varieties != null">
+        varieties = #{varieties,jdbcType=VARCHAR},
+      </if>
+      <if test="seasonal != null">
+        seasonal = #{seasonal,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.message.pojo.SampleInfo">
+    update sample_info
+    set sample_id = #{sampleId,jdbcType=VARCHAR},
+      crop_category_id = #{cropCategoryId,jdbcType=INTEGER},
+      breed = #{breed,jdbcType=INTEGER},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      county = #{county,jdbcType=VARCHAR},
+      township = #{township,jdbcType=VARCHAR},
+      village = #{village,jdbcType=VARCHAR},
+      household = #{household,jdbcType=VARCHAR},
+      harvest_time = #{harvestTime,jdbcType=TIMESTAMP},
+      sampling_time = #{samplingTime,jdbcType=TIMESTAMP},
+      sampling_people = #{samplingPeople,jdbcType=VARCHAR},
+      pollution_rate = #{pollutionRate,jdbcType=REAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      isdel = #{isdel,jdbcType=INTEGER},
+      input_time = #{inputTime,jdbcType=TIMESTAMP},
+      flag = #{flag,jdbcType=INTEGER},
+      enterpeople = #{enterpeople,jdbcType=INTEGER},
+      varieties = #{varieties,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="findAll" resultMap="BaseResultMap">
+    select si.id, si.sample_id , ap.name as pname , ato.name as tname, ac.name as cname ,
+        si.harvest_time , si.sampling_time ,cs.crop_species,
+        si.pollution_rate , GROUP_CONCAT(sti.toxin_type) as toxin_type
+        from sample_info si
+        left join sample_toxin st on si.id = st.sample_info_id
+        left join sample_toxin_info sti on sti.id = st.toxin_id
+        left join address_town ato on si.county=ato.`code`
+        left join address_city ac on si.city = ac.`code`
+        left join address_province ap on si.province = ap.`code`
+        left join crop_species cs on si.breed = cs.id
+    <where>
+      <if test="search != null and search != ''">
+            si.sample_id like CONCAT('%',#{search},'%')
+      </if>
+      <if test="pollutionRateX != null ">
+      and  si.pollution_rate BETWEEN #{pollutionRateX} AND #{pollutionRateD}
+      </if>
+      <if test="toxinType != null ">
+        and    st.toxin_id = #{toxinType}
+      </if>
+      <if test="breed != null ">
+        and    si.breed = #{breed}
+      </if>
+      <if test="province != null ">
+        and si.province=#{province}
+      </if>
+      <if test="city != null ">
+        and si.city=#{city}
+      </if>
+      <if test="county != null ">
+        and si.county=#{county}
+      </if>
+      <if test="harvestTime != null and harvestTime != '' ">
+        and si.harvest_time LIKE CONCAT('%',#{harvestTime},'%')
+      </if>
+    </where>
+        GROUP BY si.id
+        limit #{statrNum},#{pageSize}
+  </select>
+  <select id="selectSampleInfoById" resultMap="BaseResultMapByOne">
+     SELECT si.*,st.id AS tid,st.`toxin_count`,sti.`id`,sti.`toxin_type`,ato.`name` AS tname ,ac.`name` AS cname,ap.`name`AS pname,cs.`crop_species`
+    FROM sample_info si
+    LEFT JOIN sample_toxin st ON si.id = st.sample_info_id
+    LEFT JOIN sample_toxin_info sti ON sti.id = st.toxin_id
+    LEFT JOIN address_town ato ON si.county=ato.`code`
+    LEFT JOIN address_city ac ON si.city = ac.`code`
+    LEFT JOIN address_province ap ON si.province = ap.`code`
+    LEFT JOIN crop_species cs ON si.breed = cs.id
+    WHERE si.id = #{id}
+  </select>
+  <select id="selectById" resultMap="BaseResultMapVO">
+    select si.id, si.sample_id , ap.name as pname , ato.name as tname, ac.name as cname ,
+    si.harvest_time , si.sampling_time ,cs.crop_species,
+    si.pollution_rate , GROUP_CONCAT(sti.toxin_type) as toxin_type
+    from sample_info si
+    left join sample_toxin st on si.id = st.sample_info_id
+    left join sample_toxin_info sti on sti.id = st.toxin_id
+    left join address_town ato on si.county=ato.`code`
+    left join address_city ac on si.city = ac.`code`
+    left join address_province ap on si.province = ap.`code`
+    left join crop_species cs on si.breed = cs.id
+    where si.id = #{id}
+  </select>
+  <select id="findById" resultMap="BaseResultMap">
+     SELECT s.id AS sid,s.sample_id,s.province,s.city,s.county,
+            s.sampling_people,s.description,
+            s.crop_category_id,s.breed,
+            s.township,s.village,s.household,s.harvest_time,
+            s.sampling_time,s.seasonal,s.pollution_rate,
+            st.toxin_count,st.toxin_id
+        FROM sample_info s
+        LEFT JOIN sample_toxin st ON st.sample_info_id = s.id
+        WHERE s.id=#{id}
+  </select>
+  <select id="count" resultType="java.lang.Integer">
+    SELECT COUNT(*) FROM(
+ SELECT si.id
+        FROM sample_info si
+        LEFT JOIN sample_toxin st ON si.id = st.sample_info_id
+        LEFT JOIN sample_toxin_info sti ON sti.id = st.toxin_id
+        LEFT JOIN address_town ato ON si.county=ato.`code`
+        LEFT JOIN address_city ac ON si.city = ac.`code`
+        LEFT JOIN address_province ap ON si.province = ap.`code`
+        LEFT JOIN crop_species cs ON si.breed = cs.id
+        GROUP BY si.id
+)AS aa
+  </select>
+  <insert id="add" parameterType="com.message.pojo.SampleInfo" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    insert into sample_info (sample_id, crop_category_id,
+      breed, province, city,
+      county, township, village,
+      household, harvest_time, sampling_time,
+      sampling_people, pollution_rate,
+     seasonal,description)
+    values (#{sample_id},#{crop_category_id},
+    #{breed},#{province}, #{city},
+    #{county},#{township},#{village},
+    #{household},#{harvest_time},#{sampling_time}
+    #{sampling_people},#{pollution_rate},
+    #{seasonal},#{description}
+    )
+  </insert>
+
+  <!-- 根据id修改数据 -->
+  <update id="upSampleToxinById" parameterType="com.message.pojo.SampleInfo">
+        UPDATE sample_info set
+		sample_id =#{sampleId} ,crop_category_id = #{cptype},breed = #{breed},
+		province = #{province},city = #{city},county = #{county},township = #{xiang},village = #{cun},
+		household = #{hu},harvest_time = #{harvestTime},sampling_time = #{samplingTime},
+		sampling_people = #{samplingPeople},seasonal = #{seasonal},description = #{description},
+		pollution_rate = #{pollutionRate}
+        where id = #{id}
+    </update>
+</mapper>

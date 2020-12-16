@@ -1,0 +1,103 @@
+﻿
+<html>
+<head>
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/css/reset.css">
+<link rel="stylesheet"
+	href="http://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<link
+	href="<%=request.getContextPath()%>/css/foundation-datepicker.css"
+	rel="stylesheet" type="text/css">
+<!-- <link rel="stylesheet" type="text/css" href="../css/style.css"> -->
+<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/static/css/paging.css" />
+<style type="text/css">
+.color a {
+	padding: 5px;
+	color: #4c4743;
+	/* font-size: 20px; */
+}
+
+.color a:hover {
+	color: #ed6c44;
+}
+
+/* .color2 {
+	float: right;
+	color: #4c4743;
+	font-size: 20px;
+	border: 1px black hidden;
+} */
+
+.color {
+	float: right;
+	border: 1px black hidden;
+	width: 1366px;
+	text-align: center;
+}
+
+#checkOne {
+	color: #000;
+	font-size: 20px;
+}
+#checkOnediv{
+	color: #ed6c44;
+	
+}
+
+/* #h1 {
+	color: #4c4743;
+} */
+</style>
+
+</head>
+
+<body>
+	<div id="paging">
+		<br>
+		<c:if test="${list.total != 0}">
+			<div>
+			<br/>
+				<div class="color">
+				
+				<%-- <p class="color2">
+					共<i class="blue">${list.total}</i>条记录，当前显示第&nbsp; <i
+						class="blue">${list.pageNum}/${list.pages}</i>&nbsp;页
+				</p> --%>
+
+				<!-- <div class="color"> -->
+					<div class="first disable"><a
+						href="${clickPage}?pageNum=1&pageSize=${list.pageSize}&param1=${param1}&param2=${param2}&param3=${param3}&param4=${param4}&param5=${param5}&param6=${param6}&param7=${param7}&param8=${param8}&param9=${param9}&param10=${param10}">首页</a></div>
+					<c:if test="${!list.isFirstPage}">
+
+						<div class="prev disable"><a
+							href="${clickPage}?pageNum=${list.prePage}&pageSize=${list.pageSize}&param1=${param1}&param2=${param2}&param3=${param3}&param4=${param4}&param5=${param5}&param6=${param6}&param7=${param7}&param8=${param8}&param9=${param9}&param10=${param10}">上一页</a></div>
+
+					</c:if>
+
+					<c:forEach items="${list.navigatepageNums}"
+						var="navigatepageNum">
+						<c:if test="${navigatepageNum==list.getPageNum()}">
+							<div class="next" id="checkOnediv" style="background:#58a0fd; color:#FFF">
+							<a  id="checkOne" 
+								href="${clickPage}?pageNum=${navigatepageNum}&pageSize=${list.pageSize}&param1=${param1}&param2=${param2}&param3=${param3}&param4=${param4}&param5=${param5}&param6=${param6}&param7=${param7}&param8=${param8}&param9=${param9}&param10=${param10}">${navigatepageNum}</a>
+							</div>
+						</c:if>
+						<c:if test="${!(navigatepageNum==list.getPageNum())}">
+							<div class="next">
+							<a class="flag"
+								href="${clickPage}?pageNum=${navigatepageNum}&pageSize=${list.pageSize}&param1=${param1}&param2=${param2}&param3=${param3}&param4=${param4}&param5=${param5}&param6=${param6}&param7=${param7}&param8=${param8}&param9=${param9}&param10=${param10}">${navigatepageNum}</a>
+							</div>
+						</c:if>
+					</c:forEach>
+					<c:if test="${!list.isLastPage}">
+						<div class="next"><a
+							href="${clickPage}?pageNum=${list.nextPage}&pageSize=${list.pageSize}&param1=${param1}&param2=${param2}&param3=${param3}&param4=${param4}&param5=${param5}&param6=${param6}&param7=${param7}&param8=${param8}&param9=${param9}&param10=${param10}">下一页</a></div>
+					</c:if>
+					<div class="last"><a
+						href="${clickPage}?pageNum=${list.pages}&pageSize=${list.pageSize}&param1=${param1}&param2=${param2}&param3=${param3}&param4=${param4}&param5=${param5}&param6=${param6}&param7=${param7}&param8=${param8}&param9=${param9}&param10=${param10}">尾页</a></div>
+				</div>
+			</div>
+		</c:if>
+	</div>
+</body>
+</html>

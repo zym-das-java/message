@@ -1,0 +1,243 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>浏览记录</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/reset.css"/>
+	<link rel="stylesheet" href="../static/css/p_BrowsingHistory.css" /> 
+	<link rel="stylesheet" type="text/css" href="../static/css/page.css"/>
+	<link rel="stylesheet" type="text/css" href="../static/css/p_BrowsingHistory.css" />
+</head>
+<script type="text/javascript" src="../static/js/jquery.js" ></script>
+<script type="text/javascript" src="../static/js/browsing1.js" ></script>
+	<script type="text/javascript" src="../static/js/hover.js" ></script>
+<body>
+	 <header class="header">
+		<div class="header_box box">
+			<div class="logo_box">
+				LOGO
+			</div>
+			<div class="logo_right_box">
+				<ul class="logo_right_left">
+					<li><a href="${pageContext.request.contextPath }/rest/selectalls"><img src="../static/img/data.png"/><span class="logo_bt">数据浏览</span></a></li>
+					<li><a href="${pageContext.request.contextPath }/rest/toChartView"><img src="<../static/img/chart.png"/><span class="logo_bt">图表查看</span></a></li>
+					<li><a href="${pageContext.request.contextPath }/rest/toRegionalDistribution"><img src="../static/img/position.png"/><span class="logo_bt">地域分布图</span></a></li>
+				</ul>
+				<ul class="logo_2right">
+					<li><a><img src="../static/img/person.png"/><span class="logo_bt" id="logo_mycenter">个人中心</span></a></li>
+					<li><a href="javascript:if(confirm('确实要退出吗?'))location='<%=path%>/rest/user/logout'"><span class="logo_bt">退出</span><img src="<../static/img/sinout.png"/></a></li>
+				</ul>
+			</div>
+			<div id="dropdown_box">
+				<ul class="dropdown_ul">
+					<li class="dropdown_li"><a href="person_BrowsingHistory.html"><img src="<%=path %>/static/img/browsing.png"/><span>浏览记录</span></a></li>
+					<li class="dropdown_li"><a href="person_downloadRecord.html"><img src="<%=path %>/static/img/down.png"/><span>下载记录</span></a></li>
+					<li class="dropdown_li"><a href="person_updatePassword.html"><img src="<%=path %>/static/img/update.png"/><span>密码修改</span></a></li>
+				</ul>
+			</div>
+			
+			<div id="dropdown_box">
+				<ul class="dropdown_ul">
+					<li class="dropdown_li"><a href="<%=path%>/rest/listLookHistory"><img src="${pageContext.request.contextPath }/static/img/browsing.png"/><span class="activa">浏览记录</span></a></li>
+					<li class="dropdown_li"><a href="<%=path%>/rest/listDownloadHistory"><img src="${pageContext.request.contextPath }/static/img/down.png"/><span>下载记录</span></a></li>
+					<li class="dropdown_li"><a href="<%=path%>/rest/toUpdatePwd"><img src="${pageContext.request.contextPath }/static/img/update.png"/><span>密码修改</span></a></li>
+				</ul>
+			</div>
+		</div>
+		
+        
+	</header>
+
+	
+	<!--
+     		内容顶部路由页显示
+        -->
+   <article class="z-box">
+    <p class="top_url_box box">
+    	<span>当前页面 ：个人中心/</span><a>浏览记录</a>
+    	&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: gray;">只能查看最近20条浏览记录</span>
+    </p>
+    <article class="arc0">
+    	<div class="arc1">
+    	<span class="yanpbh">样品编号</span>
+    	<span class="addrr">取样信息</span>
+    	<span class="nzwclass">农作物种类</span>
+    	<span class="wrl">污染率</span>
+    	<span class="qydate">取样时间</span>
+    	<span class="zyds">主要毒素种类</span>
+    	<span class="cpjz">产毒菌株信息</span>
+    	<span class="caozuo">操作</span>
+    	</div>
+    </article>
+    <article class="article_box box">
+    	<c:forEach items="${list.list}" var="d">
+    	<c:forEach items="${list}" var="d"   begin="0" end="20" >
+    	<div class="articles_box">
+    		<div class="seria_num">
+    			<!-- <div class="sample_name">样品编号</div> -->
+    			<div class="sample_id">1</div>
+    		</div>
+    		
+    		<div class="seria_right">
+    			
+    		
+	    		<div class="articles_box_nr addr sample_info1">
+	    			<ul>
+	    				<li><span class="sam_info_value">123</span></li>
+	    				<li><span>取样人：</span><span class="sam_info_value">1</span></li>
+	    				<li><span>气候特征：</span><span class="sam_info_value">2</span></li>
+	    				<li><span>环境描述：</span><span class="sam_info_value">3</span></li>
+	    				
+	    			</ul>
+	    		</div>
+	    		<div class="articles_box_nr nzwclass sample_info1">
+	    			<ul>
+	    				<li><span></span><span class="sam_info_value">1</span></li>
+	    			</ul>
+	    		</div>
+	    		<div class="articles_box_nr wrl sample_info1">
+	    			<ul>
+	    				<li><span></span><span class="sam_info_value">2</span></li>
+	    			</ul>
+	    		</div>
+	    		<div class="articles_box_nr qydate sample_info1">
+	    			<ul>
+	    				<li><span></span><span class="sam_info_value"><fmt:formatDate pattern="yyyy-MM-dd" value="${d.sampling_time }"/></span></li>
+	    			</ul>
+	    		</div>
+	    		
+	    		<div class="articles_box_nr sample_info2">
+	    			<ul>
+	    				<li><span class="sam_info_value">3</span></li>
+	    				<li><span>含量：</span><span class="sam_info_value">${d.toxin_count  }</span></li>
+	    			</ul>
+	    		</div>
+	    		 <div class="articles_box_nr sample_info3">
+	    			<c:forEach items="${d.bacterial_strain_info}" var="ls">
+	    			<ul>
+	    				<li><span>原始编号：</span><span class="sam_info_value">4</span></li>
+	    				<li>
+	    					<span>图片文件：</span><span class="sam_info_value">
+	    						<a href="${ls.picture_addr }" ></a>
+	    					</span>
+	    				</li>
+	    				<li><span>文档信息：</span><span class="sam_info_value">
+	    				<a href="${ls.word_addr }">5</a></span></li>
+	    				
+	    			</ul>
+	    			</c:forEach>
+	    		</div>
+	    		
+	    		<div class="articles_box_nr cpjz sample_info3">
+	    			<c:choose>
+	    				<c:when test="${d.bacterial_strain_info.size()!=0}">
+	    					<c:forEach items="${d.bacterial_strain_info}" var="ls">
+				    			<ul>
+				    				<li ><span>原始编号：</span><span class="sam_info_value">1</span>
+				    					 <span  onclick="flag()" data-id="${d.id}">
+				    					   <a class="downline" href="${pageContext.request.contextPath }/rest/DataBrowsing_export?id=${d.id}" style="z-index: 100000">EXCEL导出</a>
+				    					<!-- </span> -->
+				    				</li>
+				    			
+				    				<li>
+				    					<span>图片文件：</span><span class="sam_info_value">
+				    						 <a href="${ls.picture_addr}" target="_blank"></a>
+				    					</span>
+				    					<span class="downline"> <a href="${pageContext.request.contextPath }/rest/download?picture_addr=${ls.picture_addr}&id=${d.id}" onclick="">图片下载</a></span> 
+				    				</li>
+				    				<li><span>文档信息：</span>
+				    				<span class="sam_info_value">
+				    					<a href="${pageContext.request.contextPath }/rest/lookword?url=${ls.newword_addr}" target="_blank"></a>
+				    				</span>
+				    				 <span class="downline"><a href="${pageContext.request.contextPath }/rest/downloadWord?word_addr=${ls.word_addr}&id=${d.id}">文档下载</a></span>
+				    				</li>
+				    			</ul>
+			    			</c:forEach>
+	    				</c:when>
+	    				<c:otherwise>
+	    				
+	    					<span class="sam_info_value"></span>
+				    		<!-- <span  style="z-index: -1000"> -->
+				    		 <a class="downline" style="z-index: 100000">EXCEL导出</a>
+				    		<!-- <a >EXCEL导出</a> -->
+				    		<a href="#">EXCEL导出</a>
+				    		<!-- </span> -->
+	    				</c:otherwise>
+	    			</c:choose>	
+	    			
+	    		</div>
+	    		
+	    		
+	    		
+	    		<!-- <div class="articles_box_nr sample_info4">
+	    			<ul>
+	    				<li class="showbox" >展开 <span id="showa"></span></li>
+	    				<li class="hidebox">收起 <span id="hidea"></span></li>
+	    				
+	    			</ul>
+	    		</div> -->
+	    		
+	    		
+	    		<div class="articles_box_nr caozuo sample_info4">
+	    			<ul>
+	    				<li class="downline">
+	    				<!--<a href="${pageContext.request.contextPath }/rest/download?picture_addr=${d.picture_addr}&id=${d.id}">图片下载</a>
+	    				<a href="${pageContext.request.contextPath }/rest/downloadWord?word_addr=${d.word_addr}&id=${d.id}">word下载</a>
+	    				<a href="${pageContext.request.contextPath }/rest/DataBrowsing_export?id=${d.id}">Excel下载</a>-->
+	    				 
+	    				<!--<a href="">下载</a>-->
+	    				</li>
+	    				<li class="showbox">展开 <div style="display: none">${d.id}</div><span id="showa"></span></li>
+	    				<li class="hidebox">收起 <span id="hidea"></span></li>	    			</ul>
+	    		</div>
+	    	</div>
+    	</div>
+    	</c:forEach>
+    	<div class="page">
+				<!--<%@ include file="PageUtil.jsp"%>-->
+		</div>
+    	<!-- <div class="pageing-con">
+			<ul class="pageing-info box">
+				<li class="pageing-item head"><a data-id="" href="" title="">首页</a></li>
+				<li class="pageing-item prev"><a data-id="" href="" title="">上一页</a></li>
+				<li class="pageing-item  disabled active">
+					<a data-id="1" href="javascript:void(0)" title="">1</a>
+				</li>
+				<li class="pageing-item  disabled" >
+					<a data-id="2" href="javascript:void(0)" title="">2</a>
+				</li>
+				<li class="pageing-item  disabled" >
+					<a data-id="3" href="javascript:void(0)" title="">3</a>
+				</li>
+				<li class="pageing-item  disabled" >
+					<a data-id="4" href="javascript:void(0)" title="">4</a>
+				</li>
+				<li class="pageing-item  disabled" >
+					<a data-id="5" href="javascript:void(0)" title="">5</a>
+				</li>
+				<li class="pageing-item  disabled" >
+					<a data-id="6" href="javascript:void(0)" title="">6</a>
+				</li>
+				<li class="pageing-item  disabled" >
+					<a data-id="7" href="javascript:void(0)" title="">7</a>
+				</li>
+				<li class="pageing-item  disabled" >
+					<a data-id="8" href="javascript:void(0)" title="">8</a>
+				</li>
+				<li class="pageing-item  disabled" >
+					<a data-id="9" href="javascript:void(0)" title="">9</a>
+				</li>
+				<li class="pageing-item next"><a data-id="" href="" title="">下一页</a></li>
+				<li class="pageing-item foot"><a data-id="" href="" title="">尾页</a></li>
+			</ul>
+	    </div> -->
+		
+    </article>
+   </article>
+</body>
+<script type="text/javascript">
+	function lookFun(){
+		alert(1);
+	}
+</script>
+</html>

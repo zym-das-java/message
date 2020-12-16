@@ -1,0 +1,76 @@
+﻿
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>修改用户</title>
+		<link rel="stylesheet" href="../static/css/reset.css" />
+		<link rel="stylesheet" href="../static/css/editdlb.css" />
+	</head>
+	<body>
+		<div class="user-content">
+			<p class="user-admin"><span>当前页面 : <span><a href="dlb.html">大类别管理/</a><a class="active" href="editdlb.html">修改大类别</a></p>
+		    <div class="user-modify-infolist">
+		    	<p class="user-modify-title">修改大类别</p>
+		    	<form action="categoryedit" method="post">
+		    	<ul class="modify-list">
+		    	<input type="hidden" name="id" value="${cate.id }"/>
+		    		<li class="list-item">
+		    			<label>大类别名称</label>
+		    			<input type="text" name="crop_category" value="" id="catename"/>
+		    		</li>
+		    		<li class="list-item">
+		    			<label>状态</label>
+		    			<c:if test="${cate.state==1 }" >
+		    			<input type="radio" name="state" value="1" checked="checked" />启用
+		    				<input type="radio" name="state" value="0"/>禁用
+		    			</c:if>
+		    			<c:if test="${cate.state==0 }">
+		    			<input type="radio" name="state" value="1" >启用
+		    			<input type="radio" name="state" value="0" checked="checked"/>禁用
+		    			</c:if>
+		    		</li>
+		    	</ul>
+		    	<div class="modify-option">
+		    		<a class="user-modify" onclick="xiugai()">修改</a><a class="modify-back" onclick="history.go(-1)">返回</a>
+		    	</div>
+		    </div>
+		    </form>
+		    <div class="">
+		    	<div class="addlb"><a href="skipSpecies.do">新增类别</a></div>
+		    	<table class = "user-info">
+				<tr class="info-first info-item">
+					<td>序号</td>
+					<td>类别名称</td>
+					<td>操作</td>
+				</tr>
+				<c:forEach items="${species }" var="s">
+				<tr class="info-item">
+					<td>1</td>
+					<td>2</td>
+					<td><a href="speciesByid?id=${s.id}" class="edit">编辑</a><a onclick="delte('${s.id}')" class="delete">删除</a></td>
+				</tr>
+				</c:forEach>
+			</table>
+		    </div>
+		</div>
+	</body>
+	<script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+	<script type="text/javascript">
+	   function xiugai(){
+	     if(confirm("你确定要修改吗?")){
+	        document.forms[0].submit();
+	     }else{
+	        return false;
+	     }
+	   }
+	   function delte(id){
+	     if(confirm("你确定要删除吗？")){
+	       
+	        window.location.href="speciesdelete?specid="+id;
+	     }else{
+	        return false;
+	     }
+	   }
+	</script>
+</html>

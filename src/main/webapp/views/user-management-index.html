@@ -1,0 +1,148 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>用户管理</title>
+<link rel="stylesheet" href="../static/css/reset.css" />
+<link rel="stylesheet" href="../static/css/user-management-index.css" />
+<link rel="stylesheet" href="../static/css/page-con.css" />
+<script type="text/javascript" src="../static/js/jquery1.11.3-jquery.min.js"></script>
+</head>
+<body>
+<div class="user-content">
+  <p class="user-admin"><span>当前页面 : </span><a class="active">用户管理</a></p>
+  <div class="user-search">
+    <label>用户名</label>
+    <input type="text" id = "user_name" value="" maxlength="10" onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,'')" onpaste="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,'')" oncontextmenu = "value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,'')">
+    <a onclick="searchuser()" class="search-btn">搜索</a> <a class="user-add" href="user-management-add.html">新增用户</a> </div>
+  <table class = "user-info">
+    <tr class="info-first info-item">
+      <td>序号</td>
+      <td>登录名</td>
+      <!-- <td>密码</td> -->
+      <td>用户名</td>
+      <td>角色</td>
+      <td>创建时间</td>
+      <td>创建人</td>
+      <td>状态</td>
+      <td>操作</td>
+    </tr>
+    <tr class="info-item">
+      <td>1</td>
+      <td>user-name</td>
+      <td>客户管理员</td>
+      <td>客户管理员</td>
+      <td>2018.01.11</td>
+      <!-- 1系统管理员，2信息管理员，3客户管理员，4信息权限管理员，5客户 -->
+      <td>超级管理员</td>
+      <td>启用</td>
+      <td><a href="customerModify.html" class="edit">编辑</a><a href="javascript:if(confirm('确实要删除吗?'))location='<%=path%>/rest/deleteUserById?id=${li.id}'" class="delete">删除</a></td>
+    </tr>
+    <tr class="info-item">
+      <td>2</td>
+      <td>user-name</td>
+      <td>客户管理员</td>
+      <td>客户管理员</td>
+      <td>2018.01.11</td>
+      <!-- 1系统管理员，2信息管理员，3客户管理员，4信息权限管理员，5客户 -->
+      <td>超级管理员</td>
+      <td>启用</td>
+      <td><a href="customerModify.html" class="edit">编辑</a><a href="javascript:if(confirm('确实要删除吗?'))location='<%=path%>/rest/deleteUserById?id=${li.id}'" class="delete">删除</a></td>
+    </tr>
+    <tr class="info-item">
+      <td>3</td>
+      <td>user-name</td>
+      <td>客户管理员</td>
+      <td>客户管理员</td>
+      <td>2018.01.11</td>
+      <!-- 1系统管理员，2信息管理员，3客户管理员，4信息权限管理员，5客户 -->
+      <td>超级管理员</td>
+      <td>启用</td>
+      <td><a href="customerModify.html" class="edit">编辑</a><a href="javascript:if(confirm('确实要删除吗?'))location='<%=path%>/rest/deleteUserById?id=${li.id}'" class="delete">删除</a></td>
+    </tr>
+    <tr class="info-item">
+      <td>4</td>
+      <td>user-name</td>
+      <td>客户管理员</td>
+      <td>客户管理员</td>
+      <td>2018.01.11</td>
+      <!-- 1系统管理员，2信息管理员，3客户管理员，4信息权限管理员，5客户 -->
+      <td>超级管理员</td>
+      <td>启用</td>
+      <td><a href="customerModify.html" class="edit">编辑</a><a href="javascript:if(confirm('确实要删除吗?'))location='<%=path%>/rest/deleteUserById?id=${li.id}'" class="delete">删除</a></td>
+    </tr>
+    <tr class="info-item">
+      <td>5</td>
+      <td>user-name</td>
+      <td>客户管理员</td>
+      <td>客户管理员</td>
+      <td>2018.01.11</td>
+      <!-- 1系统管理员，2信息管理员，3客户管理员，4信息权限管理员，5客户 -->
+      <td>超级管理员</td>
+      <td>启用</td>
+      <td><a href="customerModify.html" class="edit">编辑</a><a href="javascript:if(confirm('确实要删除吗?'))location='<%=path%>/rest/deleteUserById?id=${li.id}'" class="delete">删除</a></td>
+    </tr>
+    <tr class="info-item">
+      <td>6</td>
+      <td>user-name</td>
+      <td>客户管理员</td>
+      <td>客户管理员</td>
+      <td>2018.01.11</td>
+      <!-- 1系统管理员，2信息管理员，3客户管理员，4信息权限管理员，5客户 -->
+      <td>超级管理员</td>
+      <td>启用</td>
+      <td><a href="editIM.html" class="edit">编辑</a><a href="javascript:if(confirm('确实要删除吗?'))location='<%=path%>/rest/deleteUserById?id=${li.id}'" class="delete">删除</a></td>
+    </tr>
+    <tr class="info-item">
+      <td>7</td>
+      <td>user-name</td>
+      <td>客户管理员</td>
+      <td>客户管理员</td>
+      <td>2018.01.11</td>
+      <!-- 1系统管理员，2信息管理员，3客户管理员，4信息权限管理员，5客户 -->
+      <td>超级管理员</td>
+      <td>启用</td>
+      <td><a href="editIM.html" class="edit">编辑</a><a href="javascript:if(confirm('确实要删除吗?'))location='<%=path%>/rest/deleteUserById?id=${li.id}'" class="delete">删除</a></td>
+    </tr>
+    <tr class="info-item">
+      <td>8</td>
+      <td>user-name</td>
+      <td>客户管理员</td>
+      <td>客户管理员</td>
+      <td>2018.01.11</td>
+      <!-- 1系统管理员，2信息管理员，3客户管理员，4信息权限管理员，5客户 -->
+      <td>超级管理员</td>
+      <td>启用</td>
+      <td><a href="editIM.html" class="edit">编辑</a><a href="javascript:if(confirm('确实要删除吗?'))location='<%=path%>/rest/deleteUserById?id=${li.id}'" class="delete">删除</a></td>
+    </tr>
+    <tr class="info-item">
+      <td>9</td>
+      <td>user-name</td>
+      <td>客户管理员</td>
+      <td>客户管理员</td>
+      <td>2018.01.11</td>
+      <!-- 1系统管理员，2信息管理员，3客户管理员，4信息权限管理员，5客户 -->
+      <td>超级管理员</td>
+      <td>启用</td>
+      <td><a href="editIM.html" class="edit">编辑</a><a href="javascript:if(confirm('确实要删除吗?'))location='<%=path%>/rest/deleteUserById?id=${li.id}'" class="delete">删除</a></td>
+    </tr>
+  </table>
+  <div class="pageing-con">
+    <ul class="pageing-info">
+      <li class="pageing-item head"><a data-id="" href="" title="">首页</a></li>
+      <li class="pageing-item prev"><a data-id="" href="" title="">上一页</a></li>
+      <li class="pageing-item  disabled active"> <a data-id="1" href="javascript:void(0)" title="">1</a> </li>
+      <li class="pageing-item  disabled" > <a data-id="2" href="javascript:void(0)" title="">2</a> </li>
+      <li class="pageing-item  disabled" > <a data-id="3" href="javascript:void(0)" title="">3</a> </li>
+      <li class="pageing-item  disabled" > <a data-id="4" href="javascript:void(0)" title="">4</a> </li>
+      <li class="pageing-item  disabled" > <a data-id="5" href="javascript:void(0)" title="">5</a> </li>
+      <li class="pageing-item  disabled" > <a data-id="6" href="javascript:void(0)" title="">6</a> </li>
+      <li class="pageing-item  disabled" > <a data-id="7" href="javascript:void(0)" title="">7</a> </li>
+      <li class="pageing-item  disabled" > <a data-id="8" href="javascript:void(0)" title="">8</a> </li>
+      <li class="pageing-item next"><a data-id="" href="" title="">下一页</a></li>
+      <li class="pageing-item foot"><a data-id="" href="" title="">尾页</a></li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>

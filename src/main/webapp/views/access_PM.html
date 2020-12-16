@@ -1,0 +1,115 @@
+﻿
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>信息权限修改</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/reset.css"/>
+	<link rel="stylesheet" href="../static/css/a_pm.css" />
+	<link rel="stylesheet" type="text/css" href="../static/css/page.css"/>
+	<script type="text/javascript" src="../static/js/jquery.js" ></script>
+	<script type="text/javascript" src="../static/js/access_PM.js" ></script>
+</head>
+<script type="text/javascript" src="../static/js/jquery.js" ></script>
+<script type="text/javascript" src="../static/js/browsing.js" ></script>
+<body>
+	 <header class="header">
+		<div class="header_box box">
+			<div class="logo_box">
+				LOGO
+			</div>
+			<div class="logo_right_box">
+				<ul class="logo_right_left">
+					<li><a href="#"><img src="../static/img/qxgl.png"/><span class="logo_bt">权限管理</span></a></li>
+					
+				</ul>
+				<ul class="logo_2right">
+					<li><a href="javascript:if(confirm('确实要退出吗?'))location='<%=path%>/rest/user/logout'"><span class="logo_bt">退出</span><img src="../static/img/sinout.png"/></a></li>
+				</ul>
+			</div>
+			
+		
+        
+	</header>
+	<!--
+     		内容顶部路由页显示
+        -->
+    <p class="top_url_box box">
+    	<span>当前页面 ：个人中心/</span><a>权限修改</a>
+    </p>
+    <article class="arcbox box">
+    	<ul>
+    	<form action="rest/updateSampById" method="post" accept-charset="utf_8" id="edit-sam">
+    		<li class="upBt">权限修改</li>
+    		<li>
+    			<span>农产品类别</span>
+    			<input  class="ncpclass"  value="${list.crop_species}" type="text" readonly/>
+    		</li>
+    		<li>
+    			<span>查看权限</span>
+    			 <select  class="lookqx" name="check_permissions" id="chakanid">
+			        <c:if test="${(list.check_permissions==null)||(list.check_permissions==0)}">
+			       
+			        <option value="0" ><td>请选择</td></option>
+			        <c:forEach items="${listcc}" var="listcc">
+			        <option value="${listcc.id}" >${listcc.crop_category} </option>
+			        </c:forEach>
+			        <option value='0' >无权限</option>    
+			        </c:if>
+			        
+			        <c:if test="${(list.check_permissions!=null)&&(list.check_permissions!=0)}">
+			        <c:forEach items="${listcc}" var="listcc">
+			        	<option value="${listcc.id} " 
+			        		<c:if test="${list.check_permissions_name==listcc.crop_category}">selected="selected"</c:if>
+			        	>${listcc.crop_category}</option>
+			        </c:forEach>
+			        <option value='0' >无权限</option>   
+			        </c:if>
+			     </select>
+			        
+    		</li>
+    		
+    		<li>
+    			<span>下载权限</span>
+    			<select class="downqx" name="download_privileges" id="xiazaiid">
+    				<c:if test="${(list.download_privileges!=null)&&(list.download_privileges!=0)}">
+			        <option value="${list.check_permissions}" ><td>${list.download_privileges_name}</td></option>
+			        <option value='0' >无权限</option>
+			        </c:if>
+			        
+			        <c:choose>
+			        	<c:when test="${((list.download_privileges==null)||(list.download_privileges==0))&&(list.check_permissions!=null)&&(list.check_permissions!=0)}">
+							<option value='0' >无权限</option>
+							<option value="${list.check_permissions} " ><td>${list.check_permissions_name}</td></option>
+			        	</c:when>
+			        	<c:otherwise>
+			        		<option value='0' >请选择</option>
+			        	</c:otherwise>
+			        </c:choose>
+    			</select>
+    			
+    		</li>
+    		
+    		
+    		<li>
+    			<input type="submit" name="" class="submit"  value="保存" onclick="flag(${list.id})"/>
+    			<a type="button" class="submit" onclick="history.go(-1)" >返回</a>
+    		</li>
+    		 </form>
+    	</ul>
+    </article>
+    
+</body>
+    <script type="text/javascript">
+    	function flag(id){
+    		//alert(id+"id");
+    		var chakanid = $("#chakanid").val();
+    		//alert(chakanid+"chakanid");
+    		var xiazaiid = $("#xiazaiid").val();
+    		
+    		//alert(xiazaiid+"xiazaiid");
+    		window.location.href="updateSampById?id="+id+"&chakanid="+chakanid+"&xiazai="+xiazaiid;
+    	}
+    </script>
+</html>
+

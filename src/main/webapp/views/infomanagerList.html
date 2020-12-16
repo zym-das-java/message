@@ -1,0 +1,121 @@
+﻿
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>信息管理员管理</title>
+		<link rel="stylesheet" href="../static/css/reset.css" />
+		<link rel="stylesheet" href="../static/css/customer-management-index.css" />
+		<link rel="stylesheet" href="../static/css/page-con.css" />
+		<script type="text/javascript" src="../static/js/jquery1.11.3-jquery.min.js"></script>
+<script type="text/javascript" src="../static/js/checkUserUpdateForm.js" charset="utf-8"></script>
+<script src="../static/js/calendar.js"></script>
+	</head>
+	<body>
+		<div class="cus-header">
+			<div class="cus-logo"><a href="javascript:void(0)">LOGO</a></div>
+			<div class="cus-manage">
+				<a href="selectAll">
+					<img src="<%=path%>/static/img/admin.png"/>
+					<span>客户管理</span>
+				</a>
+			</div>
+			<div class="cus-quit">
+				<a href="javascript:if(confirm('确实要退出吗?'))location='<%=path%>/rest/user/logout'">
+					<span>退出</span>
+					<img src="<%=path%>/static/img/sinout.png"/>
+				</a>
+			</div>
+		</div>
+		<div class="cus-content">
+			<p class="cus-admin">
+				<span>当前页面 : <span>
+				<a class="active" href="toinfomanagerList" style="background-size: 15%;">信息管理员管理</a>
+			</p>
+			<div class="cus-search">
+				<label>真实姓名</label>
+				<input type="text" id="searchName" value="" maxlength="10" onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,'')" onpaste="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,'')" oncontextmenu = "value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,'')"/>
+				<label>用户单位</label>
+				<input type="text" id="searchCompany" value="" maxlength="20" onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,'')" onpaste="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,'')" oncontextmenu = "value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,'')"/>
+				<label>审核状态</label>
+				<select class="cus-examine" id="searchStatus">
+					<option value="">请选择</option>
+					<option value="0" <c:if test="${userstate==0}">selected</c:if>>未审核</option>
+					<option value="1" <c:if test="${userstate==1}">selected</c:if>>审核通过</option>
+					<option value="2" <c:if test="${userstate==2}">selected</c:if>>驳回</option>
+				</select>				
+				<a href="javascript:void(0)" onclick="searchByName()" class="search-btn">搜索</a>
+			</div>
+			<table class = "cus-info">
+				<tr class="info-first info-item">
+					<td>序号</td>
+					<td>账号</td>
+					<td>真实姓名</td>
+					<td>身份证号</td>
+					<td>用户单位</td>
+					<td>用户邮箱</td>
+					<td>用户手机号码</td>
+					<td>申请时间</td>
+					<!-- <td>申请方向</td> -->
+					<td>审核状态</td>
+					<td>用户状态</td>
+					<td>操作</td>
+				</tr>
+				<c:if test="${list.list.size() != 0}">
+				<c:forEach items="${list.list}" var="custom" varStatus="sd">
+				<tr class="info-item">
+					<td>1</td>
+					<td>1</td>
+					<td>2</td>
+					<td>3</td>
+					<td>4</td>
+					<td>8</td>
+					<td>5</td>
+					<td><fmt:formatDate value="${custom.application_time}" pattern="yyyy-MM-dd"/></td>
+				<!--	<td><c:if test="${custom.application_direction==1}">水果类</c:if><c:if test="${custom.application_direction==2}">谷物类</c:if>
+						<c:if test="${custom.application_direction==3}">油料类</c:if><c:if test="${custom.application_direction==4}">坚果类</c:if>
+						<c:if test="${custom.application_direction==5}">香辛类</c:if><c:if test="${custom.application_direction==6}">饲料类</c:if></td>-->
+					<td class = "ifexamine"><c:if test="${custom.check_status==1}">审核通过 </c:if><c:if test="${custom.check_status==0}">未审核 </c:if><c:if test="${custom.check_status==2}">驳回 </c:if></td>
+					<td><c:if test="${custom.state==1}">启用</c:if><c:if test="${custom.state==0}">禁用</c:if></td>
+					<td class="operation">
+						<c:if test="${custom.check_status==0}"><div class="ifshow"><a href="searchByIdXinxi?id=${custom.id}" class="examine">审核</a></div></c:if>
+						<c:if test="${custom.check_status==1}"><div class="ifshow"><a href="searchByIdNew1?id=${custom.id}" class="modify">修改</a><a onclick="return confirm('是否删除')" href="deleteById?id=${custom.id}" class="delete">删除</a></div></c:if>
+						<c:if test="${custom.check_status==2}"><div class="ifshow"><a href="searchByIdXinxi?id=${custom.id}" class="examine">审核</a></div></c:if>
+					</td>
+				</tr>
+				</c:forEach>
+				</c:if>
+				<c:if test="${list.list.size() == 0}">
+				<tr class="info-item">
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>没有数据！！</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					</tr>
+				</c:if>
+			</table>
+		    <div class="page">
+				<!--<%@ include file="PageUtil.jsp"%>-->
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="<%=path%>/static/js/jquery.js" ></script>
+	<script type="text/javascript" src="<%=path%>/static/js/customer-management-index.js" ></script>
+	<script type="text/javascript">
+		function searchByName(){
+			var name = $("#searchName").val();
+			var company = $("#searchCompany").val();
+			var state = $("#searchStatus").val();
+			
+			location.href="searchByName?param1="+name+"&param2="+state+"&param3="+company;
+		}
+	</script>
+</html>

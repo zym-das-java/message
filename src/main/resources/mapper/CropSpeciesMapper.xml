@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.message.dao.CropSpeciesMapper">
+  <resultMap id="BaseResultMap" type="com.message.pojo.CropSpecies">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="crop_species" jdbcType="VARCHAR" property="cropSpecies" />
+    <result column="crop_category_id" jdbcType="INTEGER" property="cropCategoryId" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, crop_species, crop_category_id, state
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from crop_species
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAllCropSpecies" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from crop_species
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from crop_species
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.message.pojo.CropSpecies">
+    insert into crop_species (id, crop_species, crop_category_id, 
+      state)
+    values (#{id,jdbcType=INTEGER}, #{cropSpecies,jdbcType=VARCHAR}, #{cropCategoryId,jdbcType=INTEGER}, 
+      #{state,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.message.pojo.CropSpecies">
+    insert into crop_species
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cropSpecies != null">
+        crop_species,
+      </if>
+      <if test="cropCategoryId != null">
+        crop_category_id,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="cropSpecies != null">
+        #{cropSpecies,jdbcType=VARCHAR},
+      </if>
+      <if test="cropCategoryId != null">
+        #{cropCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.message.pojo.CropSpecies">
+    update crop_species
+    <set>
+      <if test="cropSpecies != null">
+        crop_species = #{cropSpecies,jdbcType=VARCHAR},
+      </if>
+      <if test="cropCategoryId != null">
+        crop_category_id = #{cropCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.message.pojo.CropSpecies">
+    update crop_species
+    set crop_species = #{cropSpecies,jdbcType=VARCHAR},
+      crop_category_id = #{cropCategoryId,jdbcType=INTEGER},
+      state = #{state,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByCropSpecies" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    SELECT id
+    FROM crop_species
+    WHERE crop_species = #{CropSpecies}
+  </select>
+  <select id="selectByCropCategoryId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+            SELECT * FROM crop_species
+            WHERE crop_category_id = #{id}
+  </select>
+</mapper>

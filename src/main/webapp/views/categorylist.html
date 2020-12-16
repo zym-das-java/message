@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>用户管理</title>
+<link rel="stylesheet" type="text/css" href="../static/css/conmen-header.css"/>
+<link rel="stylesheet" href="../static/css/reset.css" />
+<link rel="stylesheet" href="../static/css/dlb.css" />
+<link rel="stylesheet" href="../static/css/page-con.css" />
+</head>
+<body>
+
+<div class="xtgl"> 
+<a class="dall public" href="superadmin.html">用户管理</a>
+<a class="chart dactive public" href="categorylist.html">类别管理</a>
+<a class="mps public" href="categorylist - dusu.html">毒素管理</a>
+</div>
+<div class="user-content">
+  <p class="user-admin"><span>当前页面 : </span><a href="dlb.html" style="color: #58a0fd">类别管理</a></p>
+  <div class="user-search">
+    <p><a class="user-add" href="speciesadd.html">新增类别</a></p>
+  </div>
+  <table class = "user-info">
+    <tr class="info-first info-item">
+      <td>序号</td>
+      <td>大类别名称</td>
+      <td>操作</td>
+    </tr>
+    <tr class="info-item">
+      <td>编号</td>
+      <td>项目</td>
+      <td><a class="edit">编辑</a><a onclick="delte('this')" class="delete">删除</a></td>
+    </tr>
+    <tr class="info-item">
+      <td>1</td>
+      <td>水果类</td>
+      <td><a href="toxinedit1.html" class="edit">编辑</a><a onclick="delte('1')" class="delete">删除</a></td>
+    </tr>
+    <tr class="info-item">
+      <td>2</td>
+      <td>水果类</td>
+      <td><a href="toxinedit1.html" class="edit">编辑</a><a onclick="delte('1')" class="delete">删除</a></td>
+    </tr>
+    <tr class="info-item">
+      <td>3</td>
+      <td>水果类</td>
+      <td><a href="toxinedit1.html" class="edit">编辑</a><a onclick="delte('1')" class="delete">删除</a></td>
+    </tr>
+    <tr class="info-item">
+      <td>4</td>
+      <td>水果类</td>
+      <td><a href="categoryByid?id=1" class="edit">编辑</a><a onclick="delte('1')" class="delete">删除</a></td>
+    </tr>
+    <tr class="info-item">
+      <td>5</td>
+      <td>水果类</td>
+      <td><a href="categoryByid?id=1" class="edit">编辑</a><a onclick="delte('1')" class="delete">删除</a></td>
+    </tr>
+    <tr class="info-item">
+      <td>6</td>
+      <td>水果类</td>
+      <td><a href="categoryByid?id=1" class="edit">编辑</a><a onclick="delte('1')" class="delete">删除</a></td>
+    </tr>
+    <tr class="info-item">
+      <td>7</td>
+      <td>水果类</td>
+      <td><a href="categoryByid?id=1" class="edit">编辑</a><a onclick="delte('1')" class="delete">删除</a></td>
+    </tr>
+    </c:forEach>
+    
+    </c:if>
+    
+  </table>
+  <div class="pageing-con">
+    <ul class="pageing-info">
+      <li class="pageing-item head"><a data-id="" href="" title="">首页</a></li>
+      <li class="pageing-item prev"><a data-id="" href="" title="">上一页</a></li>
+      <li class="pageing-item  disabled active"> <a data-id="1" href="javascript:void(0)" title="">1</a> </li>
+      <li class="pageing-item  disabled" > <a data-id="2" href="javascript:void(0)" title="">2</a> </li>
+      <li class="pageing-item  disabled" > <a data-id="3" href="javascript:void(0)" title="">3</a> </li>
+      <li class="pageing-item  disabled" > <a data-id="4" href="javascript:void(0)" title="">4</a> </li>
+      <li class="pageing-item  disabled" > <a data-id="5" href="javascript:void(0)" title="">5</a> </li>
+      <li class="pageing-item  disabled" > <a data-id="6" href="javascript:void(0)" title="">6</a> </li>
+      <li class="pageing-item  disabled" > <a data-id="7" href="javascript:void(0)" title="">7</a> </li>
+      <li class="pageing-item  disabled" > <a data-id="8" href="javascript:void(0)" title="">8</a> </li>
+      <li class="pageing-item next"><a data-id="" href="" title="">下一页</a></li>
+      <li class="pageing-item foot"><a data-id="" href="" title="">尾页</a></li>
+    </ul>
+  </div>
+  <div class="page"> 
+    
+  </div>
+</div>
+<script type="text/javascript">
+	  function delte(id){
+	    if(confirm("你确定要删除吗？")){
+	       window.location.href="categorydelete?id="+id;
+	    }else{
+	       return false;
+	    }
+	  }
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,348 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>编辑信息</title>
+		<link rel="stylesheet" type="text/css" href="../static/css/reset.css"/>
+		<link rel="stylesheet" type="text/css" href="../static/css/editIM.css"/>
+		<link rel="stylesheet" href="../static/css/calendar.css" />
+
+		<script src="../static/js/jquery.js"></script>
+		<script type="text/javascript" src="../static/js/calendar.js"></script>
+		<script src="../static/js/editIM.js"></script>
+		<script src="../static/js/checkUpdateIM.js"></script>
+<style>
+	html,body{height: 100%}
+</style>
+
+	</head>
+	<body>
+		<div class="contaner">
+			
+			<div class="im-content">
+				<div class="im-heade">
+					<div class="imhead-title">当前页面：<a>修改信息</a></div>
+				</div>
+	
+				<div class="editim-table">
+					<ul class="table-con">
+						<li class="edittable-top">
+							<div class="edittable-left">采样信息</div>
+							<div class="edittable-right">
+								<ul>
+									<li>
+										<lable>样品编号</lable>
+										<input type="text" name="sample_id" placeholder='首字母为英文，长度为5-15位' id="" class="ypbh" value="样品编号" onblur="checksample_id()"/>
+										<span id="sample_id" ></span>
+									</li>
+									<li>
+									<input type="hidden" name="id" id="" value="list.id" />
+										<lable>农产品加工原料类别</lable>
+										<select class="sel"  onchange="cptypes()" name="crop_category_id" id="cptype" onblur="checkcrop_category_id()">
+										
+											
+										</select>
+										<span id="crop_category_id" ></span>
+									</li>
+									<li>
+										<lable>品种</lable>
+										<select name="breed"  class="sele" id="cptypess" onblur="checkbreed()">
+											<option>
+								        	</option>
+										</select>
+										<span id="breed" ></span>
+									</li>
+									<li>
+										<div class="width">
+											 <lable>地点</lable>
+							  <input type="hidden" value="${list.province}"  id="shengs" />
+							  <input type="hidden" value="${list.city}"  id="shisss" />
+							  <input type="hidden" value="${list.county}"  id="xiansss" />
+							  <input type="hidden" value="${list.province}"  name="province" id="provinces" />
+							  <input type="hidden" value="${list.city}"  name="city" id="city" />
+							  <input type="hidden" value="${list.county}"  name="county" id="county" />
+							   <input type="hidden" value=""  id="wsx" />
+	                             <select onblur="checkprovince()"  class="province" id="shen" onchange="changeShen(this.value,'shen','shi','xian')">
+
+							    <option  value="${param6}"></option>
+				        		</select><span>省</span>
+				        		<select  class="city" onblur="checkprovince()" id="shi" onchange="changeShi(this.value,'shen','shi','xian')">
+							     <c:choose>
+						        	<c:when test="${param7== '' || param7== null }">
+
+									   </c:when>
+						        	<c:otherwise>
+						        	<option  value="${param7}"></option>
+
+						        	</c:otherwise>
+						        </c:choose>
+				        		</select><span>市</span>
+				        		<select  onblur="checkprovince()" class="county" id="xian" onchange="xianwsx()">
+				        		    <c:choose>
+						        	<c:when test="${param8== '' || param8== null }">
+
+									   </c:when>
+						        	<c:otherwise>
+						        	<option  value="${param8}"></option>
+
+						        	</c:otherwise>
+						        </c:choose>
+
+				        		</select><span>县</span>
+										</div>
+										<span class="xc">
+											<input type="text" placeholder='可为空' id="xiang" name="township" value="" />乡
+											<input type="text" placeholder='可为空' id="cun" name="village" value="" />村
+											<input type="text" placeholder='可为空' id="hu" name="household" value="" /><span>户</span>
+										</span>
+										<span id="province"></span>
+									</li>
+									<li>
+										<lable>收获时间</lable>
+										<input type="text">
+  										<div id="dd"></div>
+										<span id="harvest_time" ></span>
+									</li>
+									<li>
+										<lable>取样时间</lable>
+										<input type="text">
+  										<div id="dd-b"></div>
+  										<span id="sampling_time" class="err"></span>
+									</li>
+									<li>
+										<lable>取样人</lable>
+										<input type="text">
+										<span id="sampling_people"></span>
+									</li>
+									<li class="jijie">
+										<lable>采集季节及气候特征</lable>
+										<textarea  name="seasonal" id="seasonal1" rows="" cols="" onblur="checkseasonal()"></textarea>
+										<span id="seasonal" ></span>
+									</li>
+									<li class="huanjing">
+										<lable>采集地、环境信息描述</lable>
+										<textarea name="description" id="description1" rows="" cols="" onblur="checkdescription()"></textarea>
+										<span id="description" ></span>
+									</li>
+									<li>
+										<lable>真菌污染率</lable>
+										<input type="text" name="pollution_rate" id="" value="" onblur="checkpollution_rate()"/>
+										<span id="pollution_rate" ></span>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<div class='addds'>
+						<c:forEach items="${listtoxin}" var="litoxin">
+						<li class="edittable-middle">
+							<div class="editmiddle-left">
+								毒素信息
+							</div>
+							<div class="editmiddle-right">
+								<ul>
+									<li>
+										<lable>毒素种类</lable>
+										<select name="toxin_id" id="toxin_id1" onblur="checktoxin_id()">
+											<option value="">请选择</option>
+									       <c:forEach items="${list2}" var="lis">
+									      <option value="${lis.id} "
+								        		<c:if test="${litoxin.toxin_id==lis.id}">selected="selected"</c:if>
+								        	>${lis.toxin_type}</option>
+									      </c:forEach>
+										</select>
+										<span id="toxin_id" ></span>
+									</li>
+									<li>
+										<lable>毒素含量</lable>
+										<input name="toxin_count"  value="" type="text" onblur="checktoxin_count()"/>
+										<input name="edittoxin_id" type="hidden" value="${litoxin.id}"/>
+										<span id="toxin_count" ></span>
+									</li>
+									<li>
+										<a onclick="qwe(${lis.id});"  class="del">删除</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						</c:forEach>
+						</div>
+						<div class="add-dsxx">+添加毒素信息</div>
+						<div class="add-con">
+						<c:forEach items="${list1}" var="lis">
+
+						<li class="edittable-bottom">
+
+							<div class="editbottom-left">产毒菌株信息${lis.sample_info_id}${lis.id}</div>
+							<div class="editbottom-right">
+								<ul>
+									<li>
+										<lable>样品编号</lable>
+										<input name="sample_num" type="text" value="" class="sample" readonly/>
+										<input name="cid" type="hidden" value="${lis.id}"/>
+										<span class="err"></span>
+									</li>
+									<li>
+										<lable>菌株原始编号</lable>
+										<input name="original_num" type="text" value=""  class="num"/>
+										<span class="err"></span>
+									</li>
+									<li class="form-a">
+
+											<lable>文献信息</lable>
+											<a class="xz-btn-a">选择文件</a>
+											<input type="text" placeholder='仅支持doc/docx格式' name="wordvalues" id="" value="" class="file-name-a" readonly/>
+											<input onchange="getPhotoSizes(this)" name="word_addr"  type="file" class="file-info-a"/>
+
+									</li>
+									<li class="form-b">
+
+											<lable>文本信息</lable>
+											<a class="xz-btn-b">选择文件</a>
+											<input type="text" placeholder='仅支持txt格式' value="" name="txtvalues" id=""  class="file-name-b" readonly/>
+											<input onchange="getTextSize(this)" name="txt_addr" type="file" value="0"  class="file-info-b"/>
+
+									</li>
+									<li class="form-c">
+
+											<lable>图片信息</lable>
+											<a class="xz-btn-c">选择文件</a>
+											<input type="text" placeholder='仅支持jpg/png格式' value="" name="imgvalues" id=""  class="file-name-c" readonly/>
+											<input onchange="getPhotoSize(this)" name="picture_addr" type="file" value="0"  class="file-info-c"/>
+
+									</li>
+									<li>
+										<a onclick="qwe(${lis.id});"  class="del">删除</a>
+									</li>
+								</ul>
+							</div>
+
+						</li>
+
+						</c:forEach>
+						</div>
+					</ul>
+					<div class="add-ds">+添加产毒菌株信息</div>
+					<div class="footer">
+						<a onclick="sub()" class="baocun">修改</a>
+						<a onclick="history.go(-1)" class="marginl">返回</a>
+					</div>
+				</div>
+			
+			</div>
+		</div>
+	</body>
+	
+
+<!--	<script>
+
+	function getPhotoSize(obj){
+    photoExt=obj.value.substr(obj.value.lastIndexOf(".")).toLowerCase();//获得文件后缀名
+    console.log(photoExt);
+     if(photoExt!='.png' && photoExt!='.jpg'){
+        alert("请上传正确的照片格式!");
+         obj.value = "";
+        console.log(obj.value);
+        return false;
+    }
+    var fileSize = 0;
+    var isIE = /msie/i.test(navigator.userAgent) && !window.opera;
+    if (isIE && !obj.files) {
+         var filePath = obj.value;
+         var fileSystem = new ActiveXObject("Scripting.FileSystemObject");
+         var file = fileSystem.GetFile (filePath);
+         fileSize = file.Size;
+    }else {
+         fileSize = obj.files[0].size;
+    }
+    fileSize=Math.round(fileSize/1024*100)/100; //单位为KB
+
+
+}
+
+function getPhotoSizes(obj){
+    photoExt=obj.value.substr(obj.value.lastIndexOf(".")).toLowerCase();//获得文件后缀名
+     if(photoExt!='.doc' && photoExt!='.docx'){
+        alert("请上传正确的文档格式!");
+         obj.value = "";
+        console.log(obj.value);
+        return false;
+    }
+    var fileSize = 0;
+    var isIE = /msie/i.test(navigator.userAgent) && !window.opera;
+    if (isIE && !obj.files) {
+         var filePath = obj.value;
+         var fileSystem = new ActiveXObject("Scripting.FileSystemObject");
+         var file = fileSystem.GetFile (filePath);
+         fileSize = file.Size;
+    }else {
+         fileSize = obj.files[0].size;
+    }
+    fileSize=Math.round(fileSize/1024*100)/100; //单位为KB
+
+
+}
+
+function getTextSize(obj){
+// 	alert("校验txt");
+    photoExt=obj.value.substr(obj.value.lastIndexOf(".")).toLowerCase();//获得文件后缀名
+     if(photoExt!='.txt'){
+        alert("请上传正确的文档格式!");
+         obj.value = "";
+        console.log(obj.value);
+        return false;
+    }
+    var fileSize = 0;
+    var isIE = /msie/i.test(navigator.userAgent) && !window.opera;
+    if (isIE && !obj.files) {
+         var filePath = obj.value;
+         var fileSystem = new ActiveXObject("Scripting.FileSystemObject");
+         var file = fileSystem.GetFile (filePath);
+         fileSize = file.Size;
+    }else {
+         fileSize = obj.files[0].size;
+    }
+    fileSize=Math.round(fileSize/1024*100)/100; //单位为KB
+
+
+}
+function cptypes(){
+		    var oSelect = document.getElementById('cptype');
+            var cid = oSelect.value;
+
+		if(cid != ""){
+
+				$.ajax({
+				 type:"POST",   //http请求方式
+				 url:"selectidtype", //发送给服务器的url
+				 dataType:"json",    //传参类型
+				 data:{cid:cid},
+				 success: function(cc) {
+
+					if($(".selec").length == "0"){
+						$("#cptypess").append("<option class='selec' value='' >"+"请选择"+"</option>");
+						 for(var i=0 ;i<cc.length ;i++){
+
+						 	$("#cptypess").append(
+						 		"<option class='cpzl'  value='" +cc[i].id+ "' >"+cc[i].crop_species+"</option>"
+						 	);
+						 }
+					}else{
+						$(".selec").remove();
+							$("#cptypess").append("<option class='selec' value='' >"+"请选择"+"</option>");
+						 for(var i=0 ;i<cc.length ;i++){
+
+						 	$("#cptypess").append(
+						 		"<option class='selec'  value='" +cc[i].id+ "' >"+cc[i].crop_species+"</option>"
+						 	);
+						 }
+
+					}
+				 }
+			 });
+		}else{
+			alert("强选择原料类别！！！");
+		}
+	}
+
+	</script>-->
+</html>

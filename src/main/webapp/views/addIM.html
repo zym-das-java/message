@@ -1,0 +1,199 @@
+﻿
+<!DOCTYPE HTML>
+<html>
+  <head>
+    
+    
+    <title>信息管理</title>
+    
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	
+		<link rel="stylesheet" type="text/css" href="../static/css/reset.css"/>
+		<link rel="stylesheet" type="text/css" href="../static/css/addIM.css"/>
+		<link rel="stylesheet" type="text/css" href="../static/css/calendar.css"/>
+		<script src="../static/js/jquery.js"></script>
+					
+		<script src="../static/js/calendar.js"></script>
+		<script src="../static/js/addIM.js"></script>
+		<script src="../static/js/checkAddIM.js"></script>
+  </head>
+  <body>
+		<div class="contaner">
+			
+			<div class="im-content">
+				<div class="im-heade">
+					<div class="imhead-title">当前页面：<a >新增信息</a></div>
+				</div>
+		<form action="rest/addinformation" id="search_form"  enctype="multipart/form-data"  method="post" accept-charset="utf-8">		
+				<div class="editim-table">
+				
+					<ul class="table-con">
+						<li class="edittable-top">
+							<div class="edittable-left">采样信息</div>
+							<div class="edittable-right">
+								<ul>
+								
+									<li>
+										<lable>样品编号</lable>
+										<input type="" class="ypbh" name="sample_id">
+										<span id="sample_id" ></span>
+									</li>
+									
+									<li>
+										<lable>农产品加工原料类别</lable>
+										<select class="sel">
+										<option value="0">请选择</option>
+									    <option value="1">水果类</option>
+									    <option value="2">谷物类</option>
+									    <option value="3">大米类</option>
+									   
+										</select>
+										<span id="crop_category_id" ></span>
+									</li>
+									<li>
+										<lable>品种</lable>
+										<select class="sel" name="breed">
+											<option class="cpzl" value="" >请选择</option>
+											<option class="cpzl" value="" >水果</option>
+											<option class="cpzl" value="" >水稻</option>
+										</select>
+										<span id="breed" ></span>
+									</li>
+									
+									<li>
+										
+										 <span class="width">
+									  <lable>地点</lable>
+							  <input type="hidden" value="北京"  id="shengs" />
+							  <input type="hidden" value="上海"  id="shisss" />
+							  <input type="hidden" value="南京"  id="xiansss" />
+							  <input type="hidden" value=""  name="province" id="provinces" />
+							  <input type="hidden" value=""  name="city" id="city" />
+							  <input type="hidden" value=""  name="county" id="county" />
+							   <input type="hidden" value="123"  id="wsx" />
+	                             <select>
+							        <option  value="">请选择</option>
+							       <option  value="${param6}">北京</option>
+				        		</select><span>省</span>
+				        		<select>
+							     <
+						        	<option  value="0">请选择</option>    
+									   
+						        	
+						        	<option  value="${param7}">北京</option>
+								      
+						        
+						        
+				        		</select><span>市</span>
+				        		<select  class="county">
+				        		   
+									         <option  value="0">请选择</option>    
+									
+						        	<option  value="${param8}">北京</option>
+								      
+						       
+
+				        		</select><span>县</span>
+										 </span>
+										 <span class="xc">
+											<input style="width: 81px;" >
+											<span>乡</span>
+											<input style="width: 81px;" >
+											<span>村</span>
+											<input style="width: 81px;" >
+											<span>户</span>
+										</span>
+										<span id="province"></span>
+									</li>
+									
+									<li>
+										<lable>收获时间</lable>
+										<input type="" name="harvest_time" id="dt" value="" readonly placeholder="选择日期"/>
+										<div id="dd"></div>
+										<span class="err"></span>
+									</li>
+									<!-- onblur="checksampling_time()" -->
+									<li>
+										<lable>取样时间</lable>
+										<input type="" name="sampling_time" id="dt-b" value="" readonly placeholder="选择日期"/>
+										<div id="dd-b"></div>
+										<span class="err"></span>
+									</li>
+									
+									<li>
+										<lable>取样人</lable>
+										<input type="" name="sampling_people" id="" value="" >
+										<span id="sampling_people" ></span>
+									</li>
+									<li class="jijie">
+										<lable>采集季节及气候特征</lable>
+										<textarea></textarea>
+										<span id="seasonal" ></span>
+									</li>
+									<li class="huanjing">
+										<lable>采集地、环境信息描述</lable>
+										<textarea ></textarea>
+										<span id="description" ></span>
+									</li>
+									<li>
+										<lable>真菌污染率</lable>
+										<input name="pollution_rate"   type="" name="pollution_rate" id="" value="">
+										<span id="pollution_rate" ></span>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<div class='addds'>
+						<li class="edittable-middle">
+							<div class="editmiddle-left">
+								毒素信息
+							</div>
+							
+							<div class="editmiddle-right">
+								<ul>
+									<li>
+										<lable>毒素种类</lable>
+										<select name="toxin_id" id="toxin_id1">
+												<option value="0" >请选择</option>
+									      										                        
+						                        <option>各种毒素</option>				
+									     
+										</select>
+										<span id="toxin_id" ></span>
+									</li>
+									<li>
+										<lable>毒素含量</lable>
+										<input name="toxin_count" type="text">
+										<span id="toxin_count" ></span>
+									</li>
+									<li>
+										<a class='del'>删除</a>	
+									</li>
+								</ul>
+							</div>
+						</li>
+						</div>
+						<div class='add-dsxx'>+添加毒素信息</div>
+						<div class="add-con">
+						</div>
+					</ul>
+		
+					<div class="add-ds">+添加产毒菌株信息</div>
+					<div class="footer">
+						<a onclick="sub()"  class="baocun">保存</a>
+						<a onclick="history.go(-1)" class="marginl">返回</a> 
+						<!--<a href="javascript:if(confirm('确实要放弃操作吗?返回之后，所添加数据不会保存！'))location=''" class="marginl">返回</a>-->
+					</div>
+		
+				</div>
+					</form>	
+			</div>
+		</div>	
+	</body>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/static/js/linkage4.js"></script>
+	
+</html>

@@ -1,0 +1,223 @@
+﻿
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>信息权限管理</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/reset.css"/>
+	<link rel="stylesheet" href="../static/css/a_iam.css" />
+	<link rel="stylesheet" type="text/css" href="../static/css/page.css"/>
+	<link rel="stylesheet" href="../static/css/page-con.css" />
+</head>
+		<script type="text/javascript" src="../static/js/jquery.js"></script>
+		<script type="text/javascript" src="../static/js/browsing.js" ></script>
+		<script type="text/javascript" src="../static/js/bootstrap.min.js"></script><script type="text/javascript" src="../static/js/distpicker.data.js"></script>
+		<script type="text/javascript" src="../static/js/distpicker.js"></script> 
+		<script type="text/javascript" src="../static/js/main.js"></script>
+<script type="text/javascript" src="../static/js/linkage6.js"></script>
+<body>
+	<header class="header">
+		<div class="header_box box">
+			<div class="logo_box">
+				LOGO
+			</div>
+			<div class="logo_right_box">
+				<ul class="logo_right_left">
+					<li><a href="#"><img src="../static/img/qxgl.png"/><span class="logo_bt">权限管理</span></a></li>
+					
+				</ul>
+				<ul class="logo_2right">
+					<li><a href="javascript:if(confirm('确实要退出吗?'))location='<%=path%>/rest/user/logout'"><span class="logo_bt">退出</span><img src="../static/img/sinout.png"/></a></li>
+				</ul>
+			</div>
+			
+		
+        
+	</header>
+	<!--
+     		内容顶部路由页显示
+        -->
+    <p class="top_url_box box">
+    	<span>当前页面 ：</span><a>信息权限管理</a>
+    </p>
+    <article class="arcbox box">
+    	 <form action="findSample_info.do" method="post" accept-charset="utf-8" id="findSample_info-list">
+    		<span id="id_num">样品编号</span> 
+    		<input type="text" id = "sample_id" name="sample_id" value="001" class="yp_id"/>
+    		<span>污染率 </span>
+    		<select id="pollution_rate" name="pollution_rate" class="mainSpecies">
+    			<option value="">请选择</option>
+    			 <option value="0-20" <c:if test="${param2 == '0-20' }">selected="selected"</c:if>>0~20%</option>
+         		 <option value="20-40" <c:if test="${param2 =='20-40' }">selected="selected"</c:if>>20%~40%</option>
+          		 <option value="40-60" <c:if test="${param2 =='40-60' }">selected="selected"</c:if>>40%~60%</option>
+          		 <option value="60-80" <c:if test="${param2 =='60-80' }">selected="selected"</c:if>>60%~80%</option>
+         		 <option value="80-100" <c:if test="${param2 =='80-100' }">selected="selected"</c:if>>80%~100%</option>
+    		</select>
+    		<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;时间</span>
+			<span class="data_ymd" id="sampling_time">
+			<input id="qaz" value="${param5}" type="hidden" />
+			
+				<select id="year" name="year" class="year">
+			       <option  value="year">请选择</option>
+        		</select><span>年</span>
+        		<select id="month" name="month" class="month" >
+			        <option  value="month">请选择</option>
+        		</select><span>月</span>
+        		<select id="day" name="day" class="day">
+			        <option  value="day">请选择</option>
+        		</select><span>日</span>
+			</span>
+    		
+        <div >
+		
+		<span>主要污染菌种类  </span>
+    		<select name="toxin_type" class="mainSpecies1" id="toxin_type">
+    			 <option selected value="">请选择</option>
+				 <c:forEach items="${liststi}" var="liststi">
+                 <%-- <option value="${liststi.id} "  >${liststi.toxin_type}</option> --%>
+                 <option value="${liststi.id }" <c:if test="${param3 == liststi.id }">selected="selected"</c:if>>${liststi.toxin_type }</option>
+                 </c:forEach>
+	        </select>
+			<span>农作物类别 </span>
+			<select name="crop_species" class="mainSpecies1" id="nzw_spacies">
+		        <option selected value="">请选择</option>
+				 <c:forEach items="${listcs}" var="listcs">
+	 					<option value="${listcs.id} ">1</option> 
+				
+					<option value="${listcs.id }" <c:if test="${param4 == listcs.id }">selected="selected"</c:if>>${listcs.crop_species }</option>
+		         </c:forEach>
+        	</select>
+			<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;地点</span>
+			<span class="region">
+			  <input type="hidden" value="${ param6 }"  id="shengs" />
+							  <input type="hidden" value="${ param7 }"  id="shisss" />
+							  <input type="hidden" value="${ param8 }"  id="xiansss" />
+	                             <select name="province" class="province" id="shen" onchange="changeShen(this.value,'shen','shi','xian')">
+							        <option  value="">请选择</option>
+							       <%--  <option  value="${param6}">${param6}</option> --%>
+				        		</select><span>省</span>
+				        		<select name="city" class="city" id="shi" onchange="changeShi(this.value,'shen','shi','xian')">
+							     <c:choose>
+						        	<c:when test="${param7== '' || param7== null }">  
+									         <option  value="0">请选择</option>    
+									   </c:when>
+						        	<c:otherwise>
+						        	<option  value="${param7}">${param7}</option>
+								      
+						        	</c:otherwise>
+						        </c:choose>
+				        		</select><span>市</span>
+				        		<select name="county" class="county" id="xian">
+				        		    <c:choose>
+						        	<c:when test="${param8== '' || param8== null }">  
+									         <option  value="0">请选择</option>    
+									   </c:when>
+						        	<c:otherwise>
+						        	<option  value="${param8}">${param8}</option>
+								      
+						        	</c:otherwise>
+						        </c:choose>
+
+				        		</select><span>县</span>
+			</span>
+    		<!-- <input class="search" type="submit" value="搜索"/> -->
+    		<span class="search" value="搜索"><a onclick="searchAll()" class="search-btn">搜索</a></span>
+    		<!-- <input class="search" type="submit" value="搜索"/> -->
+    		</div>
+
+    </article>
+    
+    <article class="article_box box">
+    	<div class="article_nr">
+    		<ul class="article_title">
+    			<li>样品编号</li>
+    			<li class="dian">地点</li>
+    			<li>农产品类别</li>
+    			<li>取样时间</li>
+    			<li>真菌污染率</li>
+    			<li>主要毒素</li>
+    			<li>操作</li>
+    		</ul>
+			<c:forEach items="${list.list}" var="lstsam">
+    		<ul class="article_ul">
+    			<li></li>
+    			<li class="dian">1</li>
+    			<li>2</li>
+    			<li><f:formatDate value="${lstsam.sampling_time}" pattern="yyyy-MM-dd"/></li>
+    			<li>3</li>
+    			<li>4</li>
+    			<li><a href="<%=path %>/rest/updInformationPermissions.do?id=${lstsam.id}">权限修改</a></li>
+    		</ul>
+    		</c:forEach>
+    	</div>
+    	
+		
+    </article>
+    <div class="page" style="width:1240px">
+				
+	</div>
+</body>
+
+<script type="text/javascript">
+$(function() {
+	getSheng('shen'); 	
+	getDate();	
+	/* getKind(); */
+});
+/* function getKind(){
+	$.ajax({
+		url:"${pageContext.request.contextPath }/rest/getKind",
+		dataType:"JSON",
+		async:false,
+		success:function(obj){
+			$("select[name=nzw_spacies]").empty();
+			var spacies='<option selected value="请选择">请选择</option>';
+			for(var i in obj){
+				spacies+='<option value='+obj[i].id+'>&nbsp;&nbsp;'+obj[i].crop_species+'</option>';
+			}
+			$("select[name=nzw_spacies]").append(spacies);
+		}
+	}); 
+} */
+    
+	function searchAll(){	
+								
+		var sample_id = $("#sample_id").val();
+		var pollution_rate=$("#pollution_rate").val();
+
+		var toxin_type = $("#toxin_type").val();
+		var crop_species = $("#nzw_spacies").val();
+
+		var year = $("#year").val();
+		
+		var month = $("#month").val();
+		if(month<10){
+			month = "0"+month;
+		}else if(month=="请选择"){
+			month="";
+		}
+		var day = $("#day").val();
+		if(day<10){
+			day = "0"+day;
+		}else if(day=="请选择"){
+			day="";
+		}
+		
+		var sampling_time = year.replace(/\s/g,"")+"-"+month.replace(/\s/g,"")+"-"+day.replace(/\s/g,"");
+		var province = $("#shen option:selected").text();
+		if(province=="请选择"){
+			province="";
+		}
+		var city = $("#shi option:selected").text();
+		if(city=="请选择"){
+			city="";
+		}
+		var county = $("#xian option:selected").text();
+		if(county=="请选择"){
+			county="";
+		}  
+		location.href = "<%=path%>/rest/findSample_info?param1="+sample_id+"&param2="+pollution_rate+"&param3="+toxin_type+"&param4="+crop_species+"&param5="+sampling_time+"&param6="+province+"&param7="+city+"&param8="+county;
+	};
+</script>
+
+</html>
