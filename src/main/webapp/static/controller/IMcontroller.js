@@ -55,6 +55,24 @@ app.controller('IMController' ,function($scope,Service,$http){
             }
         )
     }
+
+    $scope.selectIds = [];  //初始化id数组的数据结构
+    //选中/反选
+    $scope.updateSelection = function ($event, id) {
+        //判断复选框选中还是反选
+        if ($event.target.checked) {
+            $scope.selectIds.push(id);   //向数组添加元素
+        } else {
+            var index = $scope.selectIds.indexOf(id);  //返回元素的下标
+            $scope.selectIds.splice(index, 1);    //数组移除元素  参数1：数组元素的下标 参数2：移除的个数
+        }
+        console.log($scope.selectIds)
+    }
+
+    $scope.Export=function(){
+        var v = prompt("请输入文件名称");
+        window.location.href = "/find/Export?ids="+$scope.selectIds + "&fileName="+v;
+    }
     $http({
         url:"/find/findAllCropSpecies",
         method:"get"

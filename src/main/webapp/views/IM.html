@@ -33,41 +33,7 @@
     }
   </style>
   <script type="text/javascript">
-    function Export(){
-      var ids = [];
-      $("input[name='Export']:checked").each(function(i){
-        ids.push($(this).val());
-      })
-      var v = prompt("请输入文件名称");
-      /*$.ajax({
-        url:"/find/Export",
-        data:{
-          "ids":ids
-        },
-        type:"get",
-        dataType:"json",
-        success: function(data){
-          alert(data.message);
-        }
-      })*/
-      window.location.href = "/find/Export?ids="+ids + "&fileName="+v;
-    }
-    function update(fid) {
-      /**
-       * 修改
-       * @constructor
-       */
-        $.ajax({
-          type: "POST",
-          url: "/find/findbyidupdata?id="+fid,
-          success: function(data){
-            if(data.success){
-              window.location.href="editIM.html";
-            }
-          }
-        });
 
-    }
     function upload() {
 
       //获取上传文件
@@ -446,7 +412,7 @@
               <input type="text" name="" id="flag" value="" class="vall vall-c" readonly>
               <input class="submit-b submit-c" type="button" value="导入菌株信息">
             </form>
-            <a onclick="Export()" class="dc">信息导出</a> </li>
+            <a ng-click="Export()" class="dc">信息导出</a> </li>
 
         </ul>
       </div>
@@ -469,7 +435,7 @@
         </thead>
         <tbody id="tbody">
         <tr ng-repeat="sam in listData.result">
-          <td><input class="testyangpin" ng-value="sam.id" type="checkbox"></td>
+          <td><input ng-click="updateSelection($event,sam.id)" type="checkbox"></td>
           <td class="ybbh">{{sam.sampleId}}</td>
           <td>{{sam.addressProvince.name}}-{{sam.addressCity.name}}-{{sam.addressTown.name}}</td>
           <td>{{sam.cropSpecies.cropSpecies}}</td>
