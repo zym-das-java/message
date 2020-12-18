@@ -35,7 +35,7 @@
   <script type="text/javascript">
     function Export(){
       var ids = [];
-      $("input[name='Export']:checked").each(function(i){
+      $("input[name='Export']:checked").each(function(){
         ids.push($(this).val());
       })
       var v = prompt("请输入文件名称");
@@ -51,22 +51,6 @@
         }
       })*/
       window.location.href = "/find/Export?ids="+ids + "&fileName="+v;
-    }
-    function update(fid) {
-      /**
-       * 修改
-       * @constructor
-       */
-        $.ajax({
-          type: "POST",
-          url: "/find/findbyidupdata?id="+fid,
-          success: function(data){
-            if(data.success){
-              window.location.href="editIM.html";
-            }
-          }
-        });
-
     }
     function upload() {
 
